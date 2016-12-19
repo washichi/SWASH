@@ -33,7 +33,7 @@ To show you the generated key
 To clone the repo navigate to a folder where you want the repo to be
 and type:
 
-> `git clone git@gitlab.com:washichi/SWASH.git`
+> `git clone git@github.com:washichi/SWASH.git`
 
 ## Pull command ##
 Before you start working make sure your local branch is up to date by
