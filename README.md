@@ -23,7 +23,7 @@ click "Add ssh key".
 
 Now open your terminal
 To Generate the key:
->`ssh-keygen -t rsa -C "your-email@something.com"`
+>`ssh-keygen -t rsa -b 4096 -C "your_email@example.com"`
 
 To show you the generated key
 >`cat ~/.ssh/id_rsa.pub`
