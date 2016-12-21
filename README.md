@@ -35,6 +35,10 @@ and type:
 
 > `git clone git@github.com:washichi/SWASH.git`
 
+When not working, try this:
+
+> `git clone https://github.com/washichi/SWASH.git`
+
 ## Pull command ##
 Before you start working make sure your local branch is up to date by
 doing a pull command.
