@@ -49,6 +49,9 @@ When doing changes make sure you and your team mates are not working on the same
 to avoid merge changes.
 
 ## Commiting ##
+When you are adding new files or directories to your local branch, you can add them with this command.
+> `git add .`
+
 After you make a change you must commit your change to your local branch.
 You can do this with the commit command
 > `git commit . -m "made changes"`
