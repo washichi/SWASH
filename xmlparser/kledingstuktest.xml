@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<garment>
+	<customerid>541</customerid>
+	<material>Cotton</material>
+	<color>White</color>
+	<weight>20.250</weight>
+	<dryer>1</dryer>
+	<steamer>0</steamer>
+	<centrifuge>0</centrifuge>
+</garment>
