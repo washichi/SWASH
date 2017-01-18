@@ -4,9 +4,7 @@
 	<material>Linen</material>
 	<color>White</color>
 	<weight>20.250</weight>
-	<washer>1</washer>
 	<dryer>1</dryer>
 	<steamer>0</steamer>
 	<centrifuge>0</centrifuge>
-	<garmentsinorder>1</garmentsinorder>
 </garment>
