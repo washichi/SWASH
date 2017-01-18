@@ -1,11 +1,10 @@
 #include "Machine.h"
 
 
-
 Machine::Machine(int drumSize)
   : drumSize(drumSize)
   , turnedOn(false)
-  , currentProgram(0)
+  , currentProgram('0')
   , programRunning(false)
 {
   if(drumSize <= 0)

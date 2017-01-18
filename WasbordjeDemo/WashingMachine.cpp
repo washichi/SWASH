@@ -1,13 +1,25 @@
 #include "WashingMachine.h"
 
+struct motorPhase
+{
+  int timesExecuted;
+  int rotateClockwise;
+  int speed;
+  int time;
+} ;
+    
 
 struct wash {
   int takeWater;
   int heat;
   int soap;
-  motorPhase1 = new motorPhase();
-  motorPhase2 = new motorPhase();
+  motorPhase motorPhase1;
+  motorPhase motorPhase2;
 } ;
+
+  wash prewash;
+  wash mainwash1;
+  wash mainwash2;
 
 
 WashingMachine::WashingMachine(int drumSize)
@@ -15,17 +27,16 @@ WashingMachine::WashingMachine(int drumSize)
   , temperature(0)
   , waterlevel(0)
 {
-    prewash  = new wash();
-    mainwash1 = new wash();
-    mainwash2 = new wash();
 }
 
-bool StartProgram(char program)
+
+    
+bool WashingMachine::StartProgram(char program)
 {
-  currentProgram = program;
+    currentProgram = program;
     switch (program)
   {
-    case A:
+    case 'A':
         //zet variabele;
         prewash.takeWater = 50;
         prewash.heat = 0;
@@ -63,7 +74,7 @@ bool StartProgram(char program)
         mainwash2.motorPhase2.speed = 2; // regular
         mainwash2.motorPhase2.time = 60; //time in sec
       break;
-    case B:
+    case 'B':
         //zet variabele;
         prewash.takeWater = 50;
         prewash.heat = 50;
@@ -101,7 +112,7 @@ bool StartProgram(char program)
         mainwash2.motorPhase2.speed = 2; // regular
         mainwash2.motorPhase2.time = 60; //time in sec
       break;
-    case C:
+    case 'C':
             //zet variabele;
         prewash.takeWater = 50;
         prewash.heat = 50;
@@ -148,7 +159,7 @@ bool StartProgram(char program)
 
 bool Program()
 {
-  StartProgram = true;
+  return false;
   // run all the functions in the right order. 
 
 }

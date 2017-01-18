@@ -3,6 +3,8 @@
 
 #include "iHardwareControl.h"
 #include "Motor.h"
+#include "MachineType.h"
+//#include "WashingMachine.h"
 
 class Machine
 {
@@ -24,19 +26,18 @@ class Machine
     // we kunnen toch gewoon kijken of er een instantie van program bestaat?
     // of is stop/start pauseren?
     void SafetyCheck();
-    // ?
-
-    struct motorPhase()
-    {
-      int timesExecuted;
-      int rotateClockwise;
-      int speed;
-      int time;
-    } ;
+    // motorphase struct?
+    struct motorPhase
+{
+  int timesExecuted;
+  int rotateClockwise;
+  int speed;
+  int time;
+} ;
 
     iHardwareControl* hardware;
 
-  private:    
+  protected:    
     Motor* motor;
     bool turnedOn;
     char currentProgram;
