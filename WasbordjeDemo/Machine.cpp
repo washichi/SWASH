@@ -1,6 +1,7 @@
 #include "Machine.h"
 
 
+
 Machine::Machine(int drumSize)
   : drumSize(drumSize)
   , turnedOn(false)
@@ -36,7 +37,7 @@ void Machine::Stop()
   programRunning = false;
 }
 
-int Machine::GetCurrentProgram()
+char Machine::GetCurrentProgram()
 {
   return currentProgram;
 }
