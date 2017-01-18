@@ -3,6 +3,7 @@
 
 #include "iHardwareControl.h"
 #include "Motor.h"
+#include "MachineType.h"
 
 class Machine
 {
@@ -26,7 +27,7 @@ class Machine
     void SafetyCheck();
     // ?
 
-    struct motorPhase()
+    struct motorPhase
     {
       int timesExecuted;
       int rotateClockwise;

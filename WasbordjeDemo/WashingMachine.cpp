@@ -25,7 +25,7 @@ bool StartProgram(char program)
   currentProgram = program;
     switch (program)
   {
-    case A:
+    case 'A':
         //zet variabele;
         prewash.takeWater = 50;
         prewash.heat = 0;
@@ -63,7 +63,7 @@ bool StartProgram(char program)
         mainwash2.motorPhase2.speed = 2; // regular
         mainwash2.motorPhase2.time = 60; //time in sec
       break;
-    case B:
+    case 'B':
         //zet variabele;
         prewash.takeWater = 50;
         prewash.heat = 50;
@@ -101,7 +101,7 @@ bool StartProgram(char program)
         mainwash2.motorPhase2.speed = 2; // regular
         mainwash2.motorPhase2.time = 60; //time in sec
       break;
-    case C:
+    case 'C':
             //zet variabele;
         prewash.takeWater = 50;
         prewash.heat = 50;

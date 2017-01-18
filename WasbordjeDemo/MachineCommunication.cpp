@@ -40,7 +40,8 @@ void MachineCommunication::SendCommand(String message)
 
 int MachineCommunication::ReceiveCommand()
 {
-  if (client.available() > 0) {
+  if (client.available() > 0)
+  {
     // read the bytes incoming from the client:
     char thisChar = client.read();
     String command_str;
@@ -60,7 +61,10 @@ int MachineCommunication::ReceiveCommand()
 
 String MachineCommunication::GetInfo()
 {
-  String info = Ethernet.localIP();
-  return "";
+  IPAddress address = Ethernet.localIP();
+  return String(address[0]) + "." +
+         String(address[1]) + "." +
+         String(address[2]) + "." +
+         String(address[3]);
 }
 
