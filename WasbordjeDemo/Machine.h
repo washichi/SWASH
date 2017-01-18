@@ -17,7 +17,7 @@ class Machine
     // dit programma moet aan deze machine gehangen worden .
     void Stop();
     // program stoppen, program "verwijderen"
-    int GetCurrentProgram();
+    char GetCurrentProgram();
     // fase van program ophalen
     bool IsRunning();
     // waarom hebben we dit?
@@ -26,12 +26,20 @@ class Machine
     void SafetyCheck();
     // ?
 
+    struct motorPhase()
+    {
+      int timesExecuted;
+      int rotateClockwise;
+      int speed;
+      int time;
+    } ;
+
     iHardwareControl* hardware;
 
   private:    
     Motor* motor;
     bool turnedOn;
-    int currentProgram;
+    char currentProgram;
     bool programRunning;
     int drumSize;
 };
