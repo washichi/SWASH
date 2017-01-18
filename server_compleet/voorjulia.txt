@@ -1,0 +1,9 @@
+Aan de luister/schrijf kant implementeren:
+
+GEDACHTE: Maak 2 message queues, 1 voor clients->server en 1 voor server->clients, met 1 messagequeue moet je ook nog gaan wachten totdat de server de messagequeue geopent heeft en blabla, is gewoon makkelijker om die apart te houden
+- 2 MessageQueues maken
+- Server non-blocking laten luisteren en schrijven
+- Zet XML van UI om in .xml bestand -> zet dan de filename op de messagequeue, zo leest mijn programma de .xml uit en dan hebben we meteen een logging systeem voor alle garments
+- Ontvang berichten van clients en zet deze op de clients->server MQ
+- Ontvang berichten van server->clients MQ en stuur deze naar de toebehorende verbinding
+- Onderscheid maken tussen meerdere machines van hetzelfde type, de machines sturen alleen "ik ben wasmachine" dus wij moeten onderscheid gaan maken tussen meerdere machines.  MAAR HOE? GEEN IDEE

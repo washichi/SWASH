@@ -7,9 +7,11 @@
 #include <vector>
 
 #include "CustomerController.h"
+#include "MachineController.h"
 
 int main(int argc, char **argv) {
-	//Open message queue
+	//Open message queue - gebruik QueueCommunicaton voor receiving/sending
+	//Geef een pointer mee aan de controllers, dan kunnen die berichten op de queue zetten
 	
 	//Open shared memory?
 	
@@ -19,6 +21,11 @@ int main(int argc, char **argv) {
 	 * gebruik washprogramcontroller en machinecontroller
 	 */
 	 CustomerController c;
+	 MachineController m;
+	 m.AddMachine(1);
+	 m.AddMachine(2);
+	 m.AddMachine(3);
+	 m.AddMachine(4);
 	 
 	 for(unsigned int i = 0; i < 5; i++)
 	 {
@@ -32,7 +39,7 @@ int main(int argc, char **argv) {
 		 Garment g(docname);
 		 c.AddGarmentToCustomer(&g);
 	 }
-	Customer* test = c.GetCustomerById(553);
+	Customer* test = c.GetCustomerById(543);
 	if(test != NULL)
 	{
 		printf("Material from XML: %s\n", test->GetFirstGarment()->GetMaterial().c_str());
