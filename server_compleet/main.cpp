@@ -18,12 +18,28 @@ int main(int argc, char **argv) {
 	 * berichten kunnen of van machines komen of van de UI
 	 * gebruik washprogramcontroller en machinecontroller
 	 */
-	if (argc != 2) {
-		fprintf(stderr, "Gebruik: %s <filenaam>\n", argv[0]);
-		exit(1);
+	 CustomerController c;
+	 
+	 for(unsigned int i = 0; i < 5; i++)
+	 {
+		 char const* docname;
+		 if(i == 0){docname = "dummy0.xml";}
+		 else if(i == 1){docname = "dummy1.xml";}
+		 else if(i == 2){docname = "dummy2.xml";}
+		 else if(i == 3){docname = "dummy3.xml";}
+		 else if(i == 4){docname = "dummy4.xml";}
+		 printf("%s\n", docname);
+		 Garment g(docname);
+		 c.AddGarmentToCustomer(&g);
+	 }
+	Customer* test = c.GetCustomerById(553);
+	if(test != NULL)
+	{
+		printf("Material from XML: %s\n", test->GetFirstGarment()->GetMaterial().c_str());
+	}
+	else
+	{
+		printf("No customer found\n");
 	}
 	
-	char const* docname = argv[1];
-	Garment g(docname);
-	printf("Material from XML: %s\n", g.GetMaterial().c_str());
 }

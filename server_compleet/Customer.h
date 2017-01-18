@@ -14,7 +14,8 @@ class Customer
 		std::vector<Garment> GetGarments();
 		int GetNumberOfGarments();
 		int GetId();
-		void AddGarment(Garment garment);
+		void AddGarment(Garment* garment);
+		Garment* GetFirstGarment();
 	
 	private:
 		int id;
