@@ -7,13 +7,13 @@ class MachineController{
 		MachineController();
 		void AddMachine(int type);
 		bool GetBusyWasher();
-		bool StartWasher(char program);
+		void StartWasher(std::string program);
 		bool GetBusyDryer();
-		bool StartDryer(char program);
+		void StartDryer(std::string program);
 		bool GetBusyCentrifuge();
-		bool StartCentrifuge(char program);
+		void StartCentrifuge(std::string program);
 		bool GetBusySteamer();
-		bool StartSteamer(char program);
+		void StartSteamer(std::string program);
 	
 	private:
 		std::vector<Machine> washers;

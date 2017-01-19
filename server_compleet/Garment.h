@@ -24,6 +24,10 @@ class Garment
 		bool GetSteamer() const;
 		bool GetCentrifuge() const;
 		int GetOrderAmount() const;
+		void SetWasher(bool washer);
+		void SetDryer(bool dryer);
+		void SetSteamer(bool steamer);
+		void SetCentrifuge(bool centrifuge);
 	
 	private:
 		int id;
@@ -36,8 +40,5 @@ class Garment
 		bool centrifuge;
 		int orderamount;
 		
-		void SetWasher(bool washer);
-		void SetDryer(bool dryer);
-		void SetSteamer(bool steamer);
-		void SetCentrifuge(bool centrifuge);
+		
 };

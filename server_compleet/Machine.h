@@ -11,7 +11,7 @@ class Machine{
 		Machine(std::string type);
 		std::string GetType();
 		bool GetBusy();
-		int StartProgram(char program);
+		int StartProgram(std::string program);
 		void Stop();
 		
 	private:

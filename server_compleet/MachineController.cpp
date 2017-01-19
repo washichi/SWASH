@@ -26,7 +26,7 @@ void MachineController::AddMachine(int type)
 
 bool MachineController::GetBusyWasher()
 {
-	printf("Washerlist size %i\n", washers.size());
+	//printf("Washerlist size %i\n", washers.size());
 	for(unsigned int i=0; i<washers.size(); i++)
 	{
 		if(washers.at(i).GetBusy())
@@ -37,24 +37,22 @@ bool MachineController::GetBusyWasher()
 	return false;
 }
 
-bool MachineController::StartWasher(char program)
+void MachineController::StartWasher(std::string program)
 {
 	if(!GetBusyWasher())
 	{
 		int command = washers.at(0).StartProgram(program);
-		printf("Washer started program %c, command: %i \n", program, command);
-		return true;
+		printf("Washer started program %s, command: %i \n", program.c_str(), command);
 	}
 	else
 	{
 		printf("Washer is busy\n");
-		return false;
 	}
 }
 
 bool MachineController::GetBusyDryer()
 {
-	printf("dryers size %i\n", dryers.size());
+	//printf("dryers size %i\n", dryers.size());
 	for(unsigned int i=0; i<dryers.size(); i++)
 	{
 		if(dryers.at(i).GetBusy())
@@ -65,23 +63,21 @@ bool MachineController::GetBusyDryer()
 	return false;
 }
 
-bool MachineController::StartDryer(char program)
+void MachineController::StartDryer(std::string program)
 {
 	if(!GetBusyDryer())
 	{
-		printf("Dryer started program %c\n", program);
-		return true;
+		printf("Dryer started program %s\n", program.c_str());
 	}
 	else
 	{
 		printf("Dryer is busy\n");
-		return false;
 	}
 }
 
 bool MachineController::GetBusyCentrifuge()
 {
-	printf("Centrifugelist size %i\n", centrifuges.size());
+	//printf("Centrifugelist size %i\n", centrifuges.size());
 	for(unsigned int i=0; i<centrifuges.size(); i++)
 	{
 		if(centrifuges.at(i).GetBusy())
@@ -92,23 +88,21 @@ bool MachineController::GetBusyCentrifuge()
 	return false;
 }
 
-bool MachineController::StartCentrifuge(char program)
+void MachineController::StartCentrifuge(std::string program)
 {
 	if(!GetBusyCentrifuge())
 	{
-		printf("Centrifuge started program %c\n", program);
-		return true;
+		printf("Centrifuge started program %s\n", program.c_str());
 	}
 	else
 	{
 		printf("Centrifuge is busy\n");
-		return false;
 	}
 }
 
 bool MachineController::GetBusySteamer()
 {
-	printf("Steamerlist size %i\n", steamers.size());
+	//printf("Steamerlist size %i\n", steamers.size());
 	for(unsigned int i=0; i<steamers.size(); i++)
 	{
 		if(steamers.at(i).GetBusy())
@@ -119,16 +113,14 @@ bool MachineController::GetBusySteamer()
 	return false;
 }
 
-bool MachineController::StartSteamer(char program)
+void MachineController::StartSteamer(std::string program)
 {
 	if(!GetBusySteamer())
 	{
-		printf("Steamer started program %c\n", program);
-		return true;
+		printf("Steamer started program %s\n", program.c_str());
 	}
 	else
 	{
 		printf("Steamer is busy\n");
-		return false;
 	}
 }

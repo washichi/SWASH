@@ -32,23 +32,15 @@ bool Machine::GetBusy()
 	return busy;
 }
 
-int Machine::StartProgram(char program)
+int Machine::StartProgram(std::string program)
 {
 	if(busy)
 	{
 		return -1;
 	}
-	switch(program) {
-		case 'A': busy = true;
-			return number + 0;
-			break;
-		case 'B': busy = true;
-			return number + 1;
-			break;
-		case 'C': busy = true;
-			return number + 2;
-			break;
-	}
+	if(program == "White"){busy = true; return number+0;}
+	else if(program == "Black"){busy = true; return number+1;}
+	else if(program == "Coloured"){busy = true; return number+2;}
 	return -1;
 }
 

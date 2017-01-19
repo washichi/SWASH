@@ -8,6 +8,7 @@
 
 #include "CustomerController.h"
 #include "MachineController.h"
+#include "WashprogramController.h"
 
 int main(int argc, char **argv) {
 	//Open message queue - gebruik QueueCommunicaton voor receiving/sending
@@ -20,12 +21,13 @@ int main(int argc, char **argv) {
 	 * berichten kunnen of van machines komen of van de UI
 	 * gebruik washprogramcontroller en machinecontroller
 	 */
-	 CustomerController c;
-	 MachineController m;
-	 m.AddMachine(1);
-	 m.AddMachine(2);
-	 m.AddMachine(3);
-	 m.AddMachine(4);
+	 CustomerController* c = new CustomerController();
+	 MachineController* m = new MachineController();
+	 m->AddMachine(1);
+	 m->AddMachine(2);
+	 m->AddMachine(3);
+	 m->AddMachine(4);
+	 WashprogramController* w = new WashprogramController(m);
 	 
 	 for(unsigned int i = 0; i < 5; i++)
 	 {
@@ -37,9 +39,12 @@ int main(int argc, char **argv) {
 		 else if(i == 4){docname = "dummy4.xml";}
 		 printf("%s\n", docname);
 		 Garment g(docname);
-		 c.AddGarmentToCustomer(&g);
+		 c->AddGarmentToCustomer(&g);
+		 w->AddGarment(&g);
 	 }
-	Customer* test = c.GetCustomerById(543);
+	 w->CalculateWashprograms();
+	 //w->StartWasher();
+	Customer* test = c->GetCustomerById(543);
 	if(test != NULL)
 	{
 		printf("Material from XML: %s\n", test->GetFirstGarment()->GetMaterial().c_str());
