@@ -1,8 +1,11 @@
 #include "MachineCommunication.h"
 #include "Machine.h"
+#include "WashingMachine.h"
 
 // te bepalen voor uploaden naar Arduino:
+Machine* machine;
 MachineType machinetype = washingmachine;
+int drumsize = 5;
 String whoami = "";
 IPAddress ip(10, 0, 0, 45);
 IPAddress server(10, 0, 0 , 15);
@@ -45,7 +48,8 @@ void setup()
   // Open serial communications and wait for port to open:
   Serial.begin(9600);
   Serial.println("Connecting...");
-
+  // not aanpassen aan machine:
+  machine = new WashingMachine(drumsize);
   machineCommunication = new MachineCommunication(ip, server, port);
 
   if (Whoami() == false)
@@ -65,6 +69,7 @@ void CheckCommand(int command)
   {
     case 15:
       //wasprogramma A
+      machine->Start('A');
       //hearbeat iets? : machineCommunication->SendCommand("#Door opened$");
       break;
     case 16:

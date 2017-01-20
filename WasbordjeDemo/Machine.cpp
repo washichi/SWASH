@@ -21,19 +21,14 @@ Machine::~Machine()
   delete motor;
 }
 
-void Machine::Start(int program)
+bool Machine::Start(char program)
 {
-  if(program < 0)
-  {
-    //throw invalid_argument("Program has to be greater than 0");
-  }
-  currentProgram = program;
-  programRunning = true;
+  // geen implementatie
 }
 
 void Machine::Stop()
 {
-  programRunning = false;
+  // geen implementatie
 }
 
 char Machine::GetCurrentProgram()

@@ -4,7 +4,8 @@
 #include "iHardwareControl.h"
 #include "Motor.h"
 #include "MachineType.h"
-//#include "WashingMachine.h"
+
+
 
 class Machine
 {
@@ -12,9 +13,9 @@ class Machine
     Machine(int drumSize);
     // post: File object is properly initialised
     // constructor needed with no parameters?
-    virtual ~Machine();
+    ~Machine();
     // destructor
-    void Start(int program);
+    virtual bool Start(char program);
     // run een instantie van de juiste program class
     // dit programma moet aan deze machine gehangen worden .
     void Stop();
@@ -27,13 +28,6 @@ class Machine
     // of is stop/start pauseren?
     void SafetyCheck();
     // motorphase struct?
-    struct motorPhase
-{
-  int timesExecuted;
-  int rotateClockwise;
-  int speed;
-  int time;
-} ;
 
     iHardwareControl* hardware;
 
