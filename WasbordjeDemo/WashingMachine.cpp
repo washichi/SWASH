@@ -162,6 +162,52 @@ bool Program()
   return false;
   // run all the functions in the right order. 
 
+  //PREWASH:
+  //
+  //Water pakken -> blocking tot juiste niveau
+  closeSink();
+  while(getWaterlevel() < prewash.takeWater)
+  {
+	openDrain();
+  }
+  closeDrain();
+  //Verwarmen -> blocking Koelt automatisch af wanneer niet aan
+  while(getTemperature() < prewash.heat)
+  {
+  	SetHeater(true);
+  }
+  SetHeater(false);
+  //Zeep toevoegen
+  if(prewash.soap == 0)
+  {
+  	setSoap1Led(false);
+  	setSoap2Led(false)};
+  }
+  else if(prewash.soap == 1){setSoap1Led(true);}
+  else if(prewash.soap == 2){setSoap2Led(true);}
+  //Motor starten voor bepaalde tijd
+  
+  //Water aflaten
+
+  
+  //MAINWASH:
+  //
+  //Water pakken -> blocking tot juiste niveau
+  //Verwarmen -> blocking Koelt automatisch af wanneer niet aan
+  //Zeep toevoegen
+  //Motor starten voor bepaalde tijd
+  //Motor starten andere kant voor bepaalde tijd
+  //Herhaal motorcyclus X keer
+  //Water aflaten
+  //
+  //Water pakken -> blocking tot juiste niveau
+  //Verwarmen -> blocking Koelt automatisch af wanneer niet aan
+  //Zeep toevoegen
+  //Motor starten voor bepaalde tijd
+  //Motor starten andere kant voor bepaalde tijd
+  //Herhaal motorcyclus X keer
+  //Water aflaten
+
 }
 
 
