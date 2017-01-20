@@ -44,14 +44,5 @@ int main(int argc, char **argv) {
 	 }
 	 w->CalculateWashprograms();
 	 //w->StartWasher();
-	Customer* test = c->GetCustomerById(543);
-	if(test != NULL)
-	{
-		printf("Material from XML: %s\n", test->GetFirstGarment()->GetMaterial().c_str());
-	}
-	else
-	{
-		printf("No customer found\n");
-	}
 	
 }
