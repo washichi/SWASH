@@ -241,10 +241,10 @@ main (int argc, char *argv[])
 						
 						//resource = send(i, buffer, len, 0);
 						
-						char message[4] = "#015";
-						printf("%s", message);
+						char message[5] = "#015$";
+						printf("message to send:%s\n", message);
 						
-						resource = send(i, message, len, 0);
+						resource = send(i, message, 5, 0);
 						
 						
 						//close_conn = TRUE;
