@@ -21,9 +21,10 @@ main (int argc, char *argv[])
 	int close_conn;
 	
 	char buffer[80];
-	
 	struct sockaddr_in addr;
 	struct timeval timeout;
+	
+	int demo = 1;
 	
 	fd_set master_set, working_set;
 	
@@ -229,14 +230,24 @@ main (int argc, char *argv[])
 							break;
 						}
 						
-						// data was received send bytes back
+						// data was received how many bytes?
 						
 						len = resource;
-						printf(" %d bytes received: \n", len);
+						
+						len = len - 2;
+						printf("  %d bytes were send\n", len);
 						
 						// echo data back to client
 						
-						resource = send(i, buffer, len, 0);
+						//resource = send(i, buffer, len, 0);
+						
+						char message[4] = "#015";
+						printf("%s", message);
+						
+						resource = send(i, message, len, 0);
+						
+						
+						//close_conn = TRUE;
 						
 						if (resource < 0)
 						{
@@ -244,6 +255,8 @@ main (int argc, char *argv[])
 							close_conn = TRUE;
 							break;
 						}
+						
+						break;
 						
 					}
 					
