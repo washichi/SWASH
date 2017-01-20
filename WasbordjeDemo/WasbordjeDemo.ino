@@ -51,12 +51,11 @@ void setup()
   if (Whoami() == false)
   {
     // whoami not recognized
-    Serial.println("WHOAMI not recognized");
+    Serial.println("WHOAMI not recognized, invalid machinetype");
     return;
   }
   machineCommunication->SendCommand("#" + whoami + "$");
   Serial.println("WHOAMI sended");
-
 }
 
 void CheckCommand(int command)

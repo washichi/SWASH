@@ -7,15 +7,16 @@ class WashingMachine: public Machine
 {	
 	public:
 		WashingMachine(int drumSize);
-    ~WashingMachine();
-    bool StartProgram(char program);
-		int getWaterlevel();
-		int getTemperature();
+    	~WashingMachine();
+    	bool StartProgram(char program);
+		int GetWaterlevel();
+		int GetTemperature();
 
 		private:
 		int waterlevel;
 		int temperature;
-    bool Program();
+		bool TempControl(int temp);
+    	bool Program();
 		void TakeWater(int waterlevel);
 		void Sink();
 		void Heat(int temperature);
