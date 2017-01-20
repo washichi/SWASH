@@ -54,6 +54,7 @@ void setup()
     Serial.println("WHOAMI not recognized, invalid machinetype");
     return;
   }
+  
   machineCommunication->SendCommand("#" + whoami + "$");
   Serial.println("WHOAMI sended");
 }
