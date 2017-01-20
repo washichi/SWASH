@@ -8,7 +8,7 @@ MachineType machinetype = washingmachine;
 int drumsize = 5;
 String whoami = "";
 IPAddress ip(10, 0, 0, 45);
-IPAddress server(10, 0, 0 , 15);
+IPAddress server(10, 0, 0, 15);
 int port = 5001; // port 5001 is unused in TCP
 
 MachineCommunication* machineCommunication;
