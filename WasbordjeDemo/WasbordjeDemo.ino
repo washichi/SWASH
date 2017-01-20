@@ -74,9 +74,11 @@ void CheckCommand(int command)
       break;
     case 16:
       //wasprogramma B
+      machine->Start('B');
       break;
     case 17:
       //wasprogramma C
+      machine->Start('C');
       break;
     case 18:
       //Dryprogram A

@@ -175,6 +175,7 @@ bool WashingMachine::TempControl(int temp)
 bool WashingMachine::Program()
 {
   programRunning = true;
+  
   // run all the functions in the right order.
   hardware->lockDoor(true);
   //PREWASH:
@@ -249,6 +250,8 @@ bool WashingMachine::Program()
   //Herhaal motorcyclus X keer
   //Water aflaten
   hardware->lockDoor(true);
+
+  programRunning = false;
   return true;
 
 }
