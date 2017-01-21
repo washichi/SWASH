@@ -13,6 +13,9 @@ class Dryer : public IMachine
 public:
 	void Test();
 	void SetId(int id);
+	int GetId(int id);
+	void CalculateProgram(Garment* garment);
+	void Finish();
 	virtual ~Dryer() {}
 private:
 	int id;

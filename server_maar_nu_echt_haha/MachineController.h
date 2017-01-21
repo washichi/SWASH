@@ -15,6 +15,8 @@ class MachineController
 		MachineController();
 		~MachineController();
 		void AddMachine(std::string name, int id);
+		bool SendGarmentToMachine(Garment* garment);
+		void FinishMachine(int id);
 		void Test();
 	private:
 		std::vector<IMachine*>* machines;

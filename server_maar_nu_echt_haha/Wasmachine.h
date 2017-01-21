@@ -13,6 +13,9 @@ class Wasmachine : public IMachine
 public:
 	void Test();
 	void SetId(int id);
+	int GetId();
+	void CalculateProgram(Garment* garment);
+	void Finish();
 	virtual ~Wasmachine() {}
 private:
 	int id;

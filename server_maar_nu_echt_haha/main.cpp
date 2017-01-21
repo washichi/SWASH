@@ -23,7 +23,10 @@ int main(int argc, char **argv) {
 	c->AddGarment("dummy4.xml");
 	m->AddMachine("DRY", 25);
 	c->Test();
-
+	c->ProcessGarments();
+	m->FinishMachine(19);
+	m->FinishMachine(24);
+	
 	delete m;
 	delete c;
 	xmlCleanupParser();
