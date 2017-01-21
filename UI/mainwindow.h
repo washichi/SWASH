@@ -29,6 +29,8 @@ private slots:
 
     void on_pushButton_7_clicked();
 
+    void on_btAlarmStop_clicked();
+
     void on_btStopSelectedMachine_clicked();
 
     void on_btCallEmployee_clicked();

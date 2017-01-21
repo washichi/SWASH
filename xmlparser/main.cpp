@@ -8,8 +8,6 @@
 
 #include "Garment.h"
 
-
-
 void
 parseGarment (xmlDocPtr doc, xmlNodePtr cur) {
 	xmlChar *key;
