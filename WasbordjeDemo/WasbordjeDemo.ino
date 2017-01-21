@@ -75,10 +75,12 @@ void CheckCommand(int command)
       break;
     case 16:
       //wasprogramma B
+      Serial.println("start B");
       machine->Start('B');
       break;
     case 17:
       //wasprogramma C
+      Serial.println("start C");
       machine->Start('C');
       break;
     case 18:

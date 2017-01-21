@@ -3,16 +3,16 @@
 struct motorPhase
 {
   int timesExecuted;
-  int rotateClockwise;
-  int speed;
+  int rotateClockwise;  //0 - 1
+  int speed;            //0 - 3
   int time;
 } ;
 
 
 struct wash {
-  int takeWater;
-  int heat;
-  int soap;
+  int takeWater;          //0 - 3
+  int heat;               //0 - 3
+  int soap;               //0 - 1
   motorPhase motorPhase1;
   motorPhase motorPhase2;
 } ;
@@ -37,8 +37,9 @@ bool WashingMachine::Start(char program)
   switch (program)
   {
     case 'A':
+      hardware->setProgramLed(1);
       //zet variabele;
-      prewash.takeWater = 50;
+      prewash.takeWater = 2; // 50%
       prewash.heat = 0;
       prewash.soap = 1;
       prewash.motorPhase1.timesExecuted =  1;
@@ -50,8 +51,8 @@ bool WashingMachine::Start(char program)
       prewash.motorPhase2.speed = 2; // regular
       prewash.motorPhase2.time = 60; //time in sec
 
-      mainwash1.takeWater = 50;
-      mainwash1.heat = 50;
+      mainwash1.takeWater = 2; // 50%
+      mainwash1.heat = 2; // 50%
       mainwash1.soap = 2;
       mainwash1.motorPhase1.timesExecuted =  2;
       mainwash1.motorPhase1.rotateClockwise = 1;
@@ -62,7 +63,7 @@ bool WashingMachine::Start(char program)
       mainwash1.motorPhase2.speed = 2; // regular
       mainwash1.motorPhase2.time = 60; //time in sec
 
-      mainwash2.takeWater = 50;
+      mainwash2.takeWater = 2; // 50%
       mainwash2.heat = 0;
       mainwash2.soap = 0;
       mainwash2.motorPhase1.timesExecuted =  2;
@@ -74,10 +75,12 @@ bool WashingMachine::Start(char program)
       mainwash2.motorPhase2.speed = 2; // regular
       mainwash2.motorPhase2.time = 60; //time in sec
       break;
+      
     case 'B':
+      hardware->setProgramLed(2);
       //zet variabele;
-      prewash.takeWater = 50;
-      prewash.heat = 50;
+      prewash.takeWater = 2; // 50%
+      prewash.heat = 2; // 50%
       prewash.soap = 1;
       prewash.motorPhase1.timesExecuted =  1;
       prewash.motorPhase1.rotateClockwise = 1;
@@ -88,7 +91,7 @@ bool WashingMachine::Start(char program)
       prewash.motorPhase2.speed = 2; // regular
       prewash.motorPhase2.time = 60; //time in sec
 
-      mainwash1.takeWater = 50;
+      mainwash1.takeWater = 2; // 50%
       mainwash1.heat = 50;
       mainwash1.soap = 2;
       mainwash1.motorPhase1.timesExecuted =  2;
@@ -100,7 +103,7 @@ bool WashingMachine::Start(char program)
       mainwash1.motorPhase2.speed = 2; // regular
       mainwash1.motorPhase2.time = 60; //time in sec
 
-      mainwash2.takeWater = 50;
+      mainwash2.takeWater = 2; // 50%
       mainwash2.heat = 0;
       mainwash2.soap = 0;
       mainwash2.motorPhase1.timesExecuted =  2;
@@ -112,10 +115,12 @@ bool WashingMachine::Start(char program)
       mainwash2.motorPhase2.speed = 2; // regular
       mainwash2.motorPhase2.time = 60; //time in sec
       break;
+      
     case 'C':
+      hardware->setProgramLed(3);
       //zet variabele;
-      prewash.takeWater = 50;
-      prewash.heat = 50;
+      prewash.takeWater = 2; // 50%
+      prewash.heat = 2; // 50%
       prewash.soap = 1;
       prewash.motorPhase1.timesExecuted =  1;
       prewash.motorPhase1.rotateClockwise = 1;
@@ -126,8 +131,8 @@ bool WashingMachine::Start(char program)
       prewash.motorPhase2.speed = 2; // regular
       prewash.motorPhase2.time = 60; //time in sec
 
-      mainwash1.takeWater = 100;
-      mainwash1.heat = 100;
+      mainwash1.takeWater = 3; //100%
+      mainwash1.heat = 3; //100%
       mainwash1.soap = 2;
       mainwash1.motorPhase1.timesExecuted = 4;
       mainwash1.motorPhase1.rotateClockwise = 1;
@@ -138,7 +143,7 @@ bool WashingMachine::Start(char program)
       mainwash1.motorPhase2.speed = 2; // regular
       mainwash1.motorPhase2.time = 60; //time in sec
 
-      mainwash2.takeWater = 50;
+      mainwash2.takeWater = 2; // 50%
       mainwash2.heat = 0;
       mainwash2.soap = 0;
       mainwash2.motorPhase1.timesExecuted =  4;
@@ -182,10 +187,10 @@ bool WashingMachine::Program()
   //
   //Water pakken -> blocking tot juiste niveau
   hardware->closeSink();
+  hardware->openDrain();
   while (GetWaterlevel() < prewash.takeWater)
   {
-    TempControl(prewash.heat); // alvast beginnen met opwarmen
-    hardware->openDrain();
+    TempControl(prewash.heat); // alvast beginnen met opwarmen    
   }
   hardware->closeDrain();
   //Verwarmen -> blocking Koelt automatisch af wanneer niet aan
@@ -201,8 +206,10 @@ bool WashingMachine::Program()
   }
   else if (prewash.soap == 1) {
     hardware->setSoap1Led(true);
+    hardware->setSoap2Led(false);
   }
   else if (prewash.soap == 2) {
+    hardware->setSoap1Led(false);
     hardware->setSoap2Led(true);
   }
   //Motor starten voor bepaalde tijd
