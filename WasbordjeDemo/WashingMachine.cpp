@@ -1,25 +1,6 @@
 #include "WashingMachine.h"
 
-struct motorPhase
-{
-  int timesExecuted;
-  int rotateClockwise;  //0 - 1
-  int speed;            //0 - 3
-  int time;
-} ;
 
-
-struct wash {
-  int takeWater;          //0 - 3
-  int heat;               //0 - 3
-  int soap;               //0 - 1
-  motorPhase motorPhase1;
-  motorPhase motorPhase2;
-} ;
-
-wash prewash;
-wash mainwash1;
-wash mainwash2;
 
 
 WashingMachine::WashingMachine(int drumSize)
@@ -158,8 +139,15 @@ bool WashingMachine::Start(char program)
     default:
       break;
   }
+
+  programRunning = true;
+  hardware->lockDoor(true);
   
-  return Program();
+  Program(prewash);
+  
+  hardware->lockDoor(false);
+  programRunning = false;
+  return true;
 
 }
 
@@ -168,56 +156,75 @@ bool WashingMachine::TempControl(int temp)
   if (GetTemperature() < temp)
   {
     hardware->SetHeater(true);
-    return true;
+    return false;
   }
   else
   {
     hardware->SetHeater(false);
-    return false;
+    return true;
   }
 }
 
-bool WashingMachine::Program()
+bool WashingMachine::MotorCyclus(int dir, int speed, int repeat)
 {
-  programRunning = true;
+  
+}
+
+bool WashingMachine::SetSoap(int soap)
+{
+  
+}
+
+bool WashingMachine::Program(wash &program)
+{
+  
   
   // run all the functions in the right order.
-  hardware->lockDoor(true);
+  
   //PREWASH:
   //
   //Water pakken -> blocking tot juiste niveau
   hardware->closeSink();
+  Serial.println("Water pakken");
   hardware->openDrain();
-  while (GetWaterlevel() < prewash.takeWater)
+  while (GetWaterlevel() < program.takeWater)
   {
-    TempControl(prewash.heat); // alvast beginnen met opwarmen    
+    TempControl(program.heat); // alvast beginnen met opwarmen    
   }
   hardware->closeDrain();
   //Verwarmen -> blocking Koelt automatisch af wanneer niet aan
-  while ((TempControl(prewash.heat)) == false)
+  Serial.println("Verwarmen");
+  while ((TempControl(program.heat)) == false)
   {
-    TempControl(prewash.heat);
+    TempControl(program.heat);
   }
+  Serial.println("Zeep pakken");
   //Zeep toevoegen
-  if (prewash.soap == 0)
+  switch(program.soap)
   {
-    hardware->setSoap1Led(false);
-    hardware->setSoap2Led(false);
+    case 0:
+      hardware->setSoap1Led(false);
+      hardware->setSoap2Led(false);
+      break;
+
+    case 1:
+      hardware->setSoap1Led(true);
+      hardware->setSoap2Led(false);
+      break;
+
+    case 2:
+      hardware->setSoap1Led(false);
+      hardware->setSoap2Led(true);
+      break;
   }
-  else if (prewash.soap == 1) {
-    hardware->setSoap1Led(true);
-    hardware->setSoap2Led(false);
-  }
-  else if (prewash.soap == 2) {
-    hardware->setSoap1Led(false);
-    hardware->setSoap2Led(true);
-  }
+
+  Serial.println("Motorcyclus");
   //Motor starten voor bepaalde tijd
   int i = 0;
-  for (; i < prewash.motorPhase1.timesExecuted; i++)
+  for (; i < program.motorPhase1.timesExecuted; i++)
   {
-    hardware->SetDirection(prewash.motorPhase1.rotateClockwise);
-    hardware->SetSpeed(prewash.motorPhase1.speed);
+    hardware->SetDirection(program.motorPhase1.rotateClockwise);
+    hardware->SetSpeed(program.motorPhase1.speed);
     /*
       clock_t start_time = clock();
       while((clock() - start_time) < (prewash.motorPhase1.time * 1000))
@@ -226,15 +233,40 @@ bool WashingMachine::Program()
       }
     */
     int j = 0;
-    for (; j < 60000; j++)
+    for (; j < (program.motorPhase1.time * 10000); j++)
     {
-      TempControl(prewash.heat);
+      TempControl(program.heat);
     }
   }
+  
+  i = 0;
+  for (; i < program.motorPhase1.timesExecuted; i++)
+  {
+    hardware->SetDirection(program.motorPhase2.rotateClockwise);
+    hardware->SetSpeed(program.motorPhase2.speed);
+    /*
+      clock_t start_time = clock();
+      while((clock() - start_time) < (prewash.motorPhase1.time * 1000))
+      {
+      tempControl(prewash.heat);
+      }
+    */
+    int j = 0;
+    for (; j < (program.motorPhase2.time * 10000); j++)
+    {
+      TempControl(program.heat);
+    }
+  }
+
+  hardware->SetSpeed(0);
+
+  Serial.println("Water aflaten");
+  
   while (GetWaterlevel() != 0)
   {
     hardware->openSink();
   }
+  hardware->closeSink();
 
   //Water aflaten
 
@@ -256,9 +288,7 @@ bool WashingMachine::Program()
   //Motor starten andere kant voor bepaalde tijd
   //Herhaal motorcyclus X keer
   //Water aflaten
-  hardware->lockDoor(true);
 
-  programRunning = false;
   return true;
 
 }
