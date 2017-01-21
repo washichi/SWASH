@@ -48,7 +48,7 @@ void setup()
   // Open serial communications and wait for port to open:
   Serial.begin(9600);
   Serial.println("Connecting...");
-  // not aanpassen aan machine:
+  // nog aanpassen aan machine:
   machine = new WashingMachine(drumsize);
   machineCommunication = new MachineCommunication(ip, server, port);
 
@@ -69,6 +69,7 @@ void CheckCommand(int command)
   {
     case 15:
       //wasprogramma A
+      Serial.println("start A");
       machine->Start('A');
       //hearbeat iets? : machineCommunication->SendCommand("#Door opened$");
       break;
@@ -121,6 +122,7 @@ void CheckCommand(int command)
 void loop()
 {
   int command = machineCommunication->ReceiveCommand();
+
   CheckCommand(command);
 
 }
