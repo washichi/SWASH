@@ -7,10 +7,11 @@
 
 // hardcoded machinetype and drumsize:
 const MachineType machinetype = washingmachine;
-const int drumsize = 5;
+const int drumsize = 10;
 
 String machineID = "";
 char program = ' ';
+String state = "";
 const IPAddress ip(10, 0, 0, 45);
 const IPAddress server(10, 0, 0, 15);
 const int port = 5001; // port 5001 is unused in TCP
@@ -83,8 +84,13 @@ void CheckCommand(int command)
   {
     case 5:
       //start machine
+      machineCommunication->SendCommand("#005$");
       Serial.println("starting program: " + String(program) +  ", machineID: " + machineID);
-      machine->Start(program);
+      if(machine->Start(program))
+      {
+        machineCommunication->SendCommand("#008$");
+        state = "done";
+      }
       break;
     case 9:
       //emergency
@@ -95,18 +101,21 @@ void CheckCommand(int command)
     case 21:  //Steamprogram A
     case 24:  //Centrifugeprogram A
       program = 'A';
+      CheckCommand(5);
       break;
     case 16:  //washprogram  B
     case 19:  //Dryprogram B
     case 22:  //Steamprogram B
     case 25:  //Centrifugeprogram B
       program = 'B';
+      CheckCommand(5);
       break;
     case 17:  //washprogram  C
     case 20:  //Dryprogram C
     case 23:  //Steamprogram C
     case 26:  //Centrifugeprogram C
       program = 'C';
+      CheckCommand(5);
       break;
     case 999:
       //machinetest

@@ -10,6 +10,7 @@ Machine::Machine(int drumSize)
   if(drumSize <= 0)
   {
     //throw invalid_argument("Drumsize has to be greater than 0");
+    return;
   }
   hardware = new iHardwareControl();
   motor = new Motor();
@@ -23,15 +24,15 @@ Machine::~Machine()
 
 bool Machine::Start(char program)
 {
-  // geen implementatie
+  // no implimentation, virtual
 }
 
 void Machine::Stop()
 {
-  // geen implementatie
+  // no implimentation, virtual
 }
 
-char Machine::GetCurrentProgram()
+char Machine::GetCurrentProgram() const
 {
   return currentProgram;
 }

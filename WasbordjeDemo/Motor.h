@@ -11,7 +11,7 @@ class Motor
     virtual ~Motor();
     void Start(int speed, int direction);
     void Stop();
-    String GetStatus();
+    String GetStatus() const;
     
   private:
     int speed;

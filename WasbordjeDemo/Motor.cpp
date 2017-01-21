@@ -42,7 +42,7 @@ void Motor::Stop()
   hardware->SetSpeed(this->speed);
 }
 
-String Motor::GetStatus()
+String Motor::GetStatus() const
 {
   String status = "Speed: " + speed;
   status += ", direction: ";

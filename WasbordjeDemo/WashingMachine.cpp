@@ -19,7 +19,7 @@ bool WashingMachine::Start(char program)
   {
     case 'A':
       hardware->setProgramLed(1);
-      //zet variabele;
+      //set variables:
       prewash.takeWater = 2; // 50%
       prewash.heat = 0;
       prewash.soap = 1;
@@ -59,7 +59,7 @@ bool WashingMachine::Start(char program)
 
     case 'B':
       hardware->setProgramLed(2);
-      //zet variabele;
+      //set variables:
       prewash.takeWater = 2; // 50%
       prewash.heat = 2; // 50%
       prewash.soap = 1;
@@ -99,7 +99,7 @@ bool WashingMachine::Start(char program)
 
     case 'C':
       hardware->setProgramLed(3);
-      //zet variabele;
+      //set variables:
       prewash.takeWater = 2; // 50%
       prewash.heat = 2; // 50%
       prewash.soap = 1;
@@ -150,7 +150,6 @@ bool WashingMachine::Start(char program)
   hardware->lockDoor(false);
   programRunning = false;
   return true;
-
 }
 
 bool WashingMachine::TempControl(int temp)
