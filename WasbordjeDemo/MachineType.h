@@ -5,7 +5,7 @@ enum MachineType
 {
   washingmachine,
   dryer,
-  steamer,
+  steammachine,
   centrifuge,
   unknown
 };
