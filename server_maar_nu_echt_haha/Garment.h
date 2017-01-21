@@ -13,7 +13,6 @@
 class Garment
 {
 	public:
-		Garment(int id, double weight, std::string material, std::string color);
 		Garment(char const* docname);
 		int GetId() const;
 		double GetWeight() const ;
