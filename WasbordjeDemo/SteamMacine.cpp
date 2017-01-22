@@ -1,7 +1,7 @@
 #include "SteamMachine.h"
 
-SteamMachine::SteamMachine(int drumSize)
-  : Machine(drumSize)
+SteamMachine::SteamMachine(int drumSize, MachineCommunication& com)
+  : Machine(drumSize, com)
   , temperature(0)
   , pressure(0)
 {

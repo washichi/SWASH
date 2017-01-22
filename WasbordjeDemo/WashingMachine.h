@@ -6,7 +6,7 @@
 class WashingMachine: public Machine
 {
   public:
-    WashingMachine(int drumSize);
+    WashingMachine(int drumSize, MachineCommunication& com);
     ~WashingMachine();
     bool Start(char program);
     int GetWaterlevel();

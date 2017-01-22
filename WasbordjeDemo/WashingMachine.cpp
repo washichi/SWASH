@@ -3,8 +3,8 @@
 
 
 
-WashingMachine::WashingMachine(int drumSize)
-  : Machine(drumSize)
+WashingMachine::WashingMachine(int drumSize, MachineCommunication& com)
+  : Machine(drumSize, com)
   , temperature(0)
 {
   waterlevel = 0;
@@ -225,6 +225,8 @@ bool WashingMachine::Program(wash & program)
   {
     // ##########################################################
     // CHECK FOR MESSAGES
+    //int receivedcommand = machineCommunication->ReceiveCommand();
+    //CheckCommand(receivedcommand);
     // ##########################################################
     TempControl(program.heat); // alvast beginnen met opwarmen
   }

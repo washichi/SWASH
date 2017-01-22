@@ -1,8 +1,9 @@
 #include "Machine.h"
 
 
-Machine::Machine(int drumSize)
+Machine::Machine(int drumSize, MachineCommunication& com)
   : drumSize(drumSize)
+  , machineCommunication(com)
   , turnedOn(false)
   , currentProgram('0')
   , programRunning(false)

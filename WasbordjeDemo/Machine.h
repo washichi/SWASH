@@ -4,13 +4,15 @@
 #include "iHardwareControl.h"
 #include "Motor.h"
 #include "MachineType.h"
+#include "MachineState.h"
+#include "MachineCommunication.h"
 
 
 
 class Machine
 {
   public:
-    Machine(int drumSize);
+    Machine(int drumSize, MachineCommunication& com);
     // post: File object is properly initialised
     // constructor needed with no parameters?
     ~Machine();
@@ -37,6 +39,7 @@ class Machine
     char currentProgram;
     bool programRunning;
     int drumSize;
+    MachineCommunication& machineCommunication;
 };
 
 #endif
