@@ -3,6 +3,10 @@
 void Wasmachine::Test()
 {
 	printf("Wasmachine test + id %i\n", id);
+	for (unsigned int i =0; i< garmentsInProgram->size();i++)
+   {
+     printf("Garment in program with id %i\n", garmentsInProgram->at(i)->GetId());
+   } 
 }
 
 void Wasmachine::Initialize(int id)
@@ -10,7 +14,7 @@ void Wasmachine::Initialize(int id)
 	garmentsInProgram = new std::vector<Garment*>;
 	this->id = id;
 	this->busy = false;
-	this->currentProgram = true;
+	this->readyToCalculateProgram = true;
 }
 
 Wasmachine::~Wasmachine()
@@ -33,6 +37,7 @@ bool Wasmachine::AddToProgram(Garment* garment)
 {
 	if(!garment->GetWasher() || this->busy)
 	{
+		printf("no washer and busy\n");
 		return false;
 	}
 	
@@ -40,18 +45,22 @@ bool Wasmachine::AddToProgram(Garment* garment)
 	{
 		currentProgram = GetProgram(garment->GetColor());
 		readyToCalculateProgram = false;
+		printf("current program %c\n", currentProgram);
 	}
 	
 	if(GetProgram(garment->GetColor()) == currentProgram)
 	{
 		garmentsInProgram->push_back(garment);
+		printf("no washer and busy\n");
 		return true;
 	}
+	printf("end of addtoprogram\n");
 	return false;
 }
 
 void Wasmachine::Finish()
 {
+	
 	printf("Wasmachine met id %i is klaar\n", this->id);
 }
 
