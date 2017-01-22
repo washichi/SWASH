@@ -13,7 +13,6 @@
 class Garment
 {
 	public:
-		Garment(int id, double weight, std::string material, std::string color);
 		Garment(char const* docname);
 		int GetId() const;
 		double GetWeight() const ;
@@ -23,6 +22,7 @@ class Garment
 		bool GetDryer() const;
 		bool GetSteamer() const;
 		bool GetCentrifuge() const;
+		bool GetFinished() const;
 		int GetOrderAmount() const;
 		void SetWasher(bool washer);
 		void SetDryer(bool dryer);
@@ -39,4 +39,6 @@ class Garment
 		bool steamer;
 		bool centrifuge;
 		int orderamount;
+		bool finished;
+		void CheckIfFinished();
 };

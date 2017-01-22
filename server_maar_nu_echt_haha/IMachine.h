@@ -7,14 +7,23 @@
 #include <vector>
 #include <map>
 
+#include "Garment.h"
+
 class IMachine
 {
 	public:
 		void virtual Test();
-		void virtual SetId(int id);
+		void virtual Initialize(int id);
+		int virtual GetId();
+		bool virtual AddToProgram(Garment* garment);
+		void virtual Finish();
+		bool virtual IsBusy();
 		virtual ~IMachine() {}
 	private:
 		int id;
+		bool readyToCalculateProgram;
+		bool busy;
+		char currentWashProgram;
 };
 
 

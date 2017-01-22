@@ -20,7 +20,7 @@ class Machine
     // dit programma moet aan deze machine gehangen worden .
     void Stop();
     // program stoppen, program "verwijderen"
-    char GetCurrentProgram();
+    char GetCurrentProgram() const;
     // fase van program ophalen
     bool IsRunning();
     // waarom hebben we dit?

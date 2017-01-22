@@ -1,36 +1,47 @@
 #include "MachineCommunication.h"
 #include "Machine.h"
 #include "WashingMachine.h"
+#include "Dryer.h"
+#include "SteamMachine.h"
+#include "Centrifuge.h"
 
-// te bepalen voor uploaden naar Arduino:
-Machine* machine;
-MachineType machinetype = washingmachine;
-int drumsize = 5;
-String whoami = "";
-IPAddress ip(10, 0, 0, 45);
-IPAddress server(10, 0, 0, 15);
-int port = 5001; // port 5001 is unused in TCP
+// hardcoded machinetype and drumsize:
+const MachineType machinetype = washingmachine;
+const int drumsize = 10;
+
+String machineID = "";
+char program = ' ';
+String state = "";
+const IPAddress ip(10, 0, 0, 45);
+const IPAddress server(10, 0, 0, 15);
+const int port = 5001; // port 5001 is unused in TCP
 
 MachineCommunication* machineCommunication;
+Machine* machine = NULL;
 
-bool Whoami()
+// creates machine based on machinetype variable
+bool machineInit()
 {
   switch (machinetype)
   {
     case washingmachine:
-      whoami = 001;
+      machine = new WashingMachine(drumsize);
+      machineID = 001;
       break;
 
     case dryer:
-      whoami = 002;
+      machine = new Dryer(drumsize);
+      machineID = 002;
       break;
 
-    case steamer:
-      whoami = 003;
+    case steammachine:
+      machine = new SteamMachine(drumsize);
+      machineID = 003;
       break;
 
     case centrifuge:
-      whoami = 004;
+      machine = new Centrifuge(drumsize);
+      machineID = 004;
       break;
 
     default:
@@ -38,74 +49,73 @@ bool Whoami()
       return false;
       break;
   }
-
   return true;
 }
 
 void setup()
 {
-
   // Open serial communications and wait for port to open:
   Serial.begin(9600);
   Serial.println("Connecting...");
-  // not aanpassen aan machine:
-  machine = new WashingMachine(drumsize);
-  machineCommunication = new MachineCommunication(ip, server, port);
 
-  if (Whoami() == false)
+  machineCommunication = new MachineCommunication(ip, server, port);
+  // create a machine
+  if (machineInit() == false)
   {
-    // whoami not recognized
-    Serial.println("WHOAMI not recognized, invalid machinetype");
+    //machine not recognized
+    Serial.println("machine not recognized, invalid machinetype");
     return;
   }
-  
-  machineCommunication->SendCommand("#" + whoami + "$");
-  Serial.println("WHOAMI sended");
+  if(machine == NULL)
+  {
+    // machine creation failed
+    Serial.println("error while creating machine");
+    return;
+  }
+  machineCommunication->SendCommand("#" + machineID + "$");
+  Serial.println("machineID sended");
 }
 
+
+//function to convert command to action via protocol
 void CheckCommand(int command)
 {
   switch (command)
   {
-    case 15:
-      //wasprogramma A
-      machine->Start('A');
-      //hearbeat iets? : machineCommunication->SendCommand("#Door opened$");
+    case 5:
+      //start machine
+      machineCommunication->SendCommand("#005$");
+      Serial.println("starting program: " + String(program) +  ", machineID: " + machineID);
+      if(machine->Start(program))
+      {
+        machineCommunication->SendCommand("#008$");
+        state = "done";
+      }
       break;
-    case 16:
-      //wasprogramma B
-      machine->Start('B');
+    case 9:
+      //emergency
+
       break;
-    case 17:
-      //wasprogramma C
-      machine->Start('C');
+    case 15:  //washprogram A
+    case 18:  //Dryprogram A
+    case 21:  //Steamprogram A
+    case 24:  //Centrifugeprogram A
+      program = 'A';
+      CheckCommand(5);
       break;
-    case 18:
-      //Dryprogram A
+    case 16:  //washprogram  B
+    case 19:  //Dryprogram B
+    case 22:  //Steamprogram B
+    case 25:  //Centrifugeprogram B
+      program = 'B';
+      CheckCommand(5);
       break;
-    case 19:
-      //Dryprogram B
-      break;
-    case 20:
-      //Dryprogram C
-      break;
-    case 21:
-      //Steamprogram A
-      break;
-    case 22:
-      //Steamprogram B
-      break;
-    case 23:
-      //Steamprogram C
-      break;
-    case 24:
-      //Centrifugeprogram A
-      break;
-    case 25:
-      //Centrifugeprogram B
-      break;
-    case 26:
-      //Centrifugeprogram C
+    case 17:  //washprogram  C
+    case 20:  //Dryprogram C
+    case 23:  //Steamprogram C
+    case 26:  //Centrifugeprogram C
+      program = 'C';
+      CheckCommand(5);
       break;
     case 999:
       //machinetest

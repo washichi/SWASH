@@ -7,15 +7,28 @@
 #include <vector>
 #include <map>
 
-#include "IMachine.h"
-#include "MachineFactory.h"
+#include "GarmentController.h"
+#include "MachineController.h"
 
 int main(int argc, char **argv) {
-	IMachine* x = MachineFactory::NewMachine("WAS");
-	x->SetId(19);
-	x->Test();
+	MachineController* m = new MachineController();
+	m->AddMachine("WAS", 19);
+	m->Test();
 	
-	IMachine* y = MachineFactory::NewMachine("DRY");
-	y->SetId(25);
-	y->Test();
+	GarmentController* c = new GarmentController(m);
+	c->AddGarment("dummy0.xml");
+	c->AddGarment("dummy1.xml");
+	c->AddGarment("dummy2.xml");
+	c->AddGarment("dummy3.xml");
+	c->AddGarment("dummy4.xml");
+	m->AddMachine("DRY", 25);
+	c->Test();
+	c->ProcessGarments();
+	
+	m->FinishMachine(19);
+	m->FinishMachine(24);
+	
+	delete m;
+	delete c;
+	xmlCleanupParser();
 }
