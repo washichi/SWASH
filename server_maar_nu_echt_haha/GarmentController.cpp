@@ -37,6 +37,10 @@ void GarmentController::ProcessGarments()
 	for(unsigned int i = 0; i < toBeProcessed->size(); i++)
 	{
 		printf("Process Garment %i with CustomerID %i\n", i+1, toBeProcessed->at(i)->GetId());
-		machineptr->SendGarmentToMachine(toBeProcessed->at(i));
+		if(machineptr->SendGarmentToMachine(toBeProcessed->at(i)))
+		{
+			toBeProcessed->erase(toBeProcessed->begin()+i);
+			i=0;
+		}
 	}
 }

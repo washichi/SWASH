@@ -22,6 +22,7 @@ class Garment
 		bool GetDryer() const;
 		bool GetSteamer() const;
 		bool GetCentrifuge() const;
+		bool GetFinished() const;
 		int GetOrderAmount() const;
 		void SetWasher(bool washer);
 		void SetDryer(bool dryer);
@@ -38,4 +39,6 @@ class Garment
 		bool steamer;
 		bool centrifuge;
 		int orderamount;
+		bool finished;
+		void CheckIfFinished();
 };

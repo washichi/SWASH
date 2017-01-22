@@ -79,26 +79,32 @@ Garment::Garment(char const* docname)
 	}
 	xmlFreeDoc(doc);
 	xmlFree(cur);
+	finished = false;
+	CheckIfFinished();
 }
 
 void Garment::SetWasher(bool washer)
 {
 	this->washer = washer;
+	CheckIfFinished();
 }
 
 void Garment::SetDryer(bool dryer)
 {
 	this->dryer = dryer;
+	CheckIfFinished();
 }
 
 void Garment::SetSteamer(bool steamer)
 {
 	this->steamer = steamer;
+	CheckIfFinished();
 }
 
 void Garment::SetCentrifuge(bool centrifuge)
 {
 	this->centrifuge = centrifuge;
+	CheckIfFinished();
 }
 
 int Garment::GetId() const
@@ -139,4 +145,13 @@ bool Garment::GetSteamer() const
 bool Garment::GetCentrifuge() const
 {
 	return centrifuge;
+}
+
+void Garment::CheckIfFinished()
+{
+	if(!GetWasher() && !GetDryer() && !GetSteamer() && !GetCentrifuge())
+	{
+		this->finished = true;
+		printf("Garment with ID: %i is finished\n", this->id);
+	}
 }

@@ -12,11 +12,17 @@ class Wasmachine : public IMachine
 {
 public:
 	void Test();
-	void SetId(int id);
+	void Initialize(int id);
 	int GetId();
-	void CalculateProgram(Garment* garment);
+	bool AddToProgram(Garment* garment);
 	void Finish();
-	virtual ~Wasmachine() {}
+	bool IsBusy();
+	virtual ~Wasmachine();
 private:
 	int id;
+	bool readyToCalculateProgram;
+	bool busy;
+	char currentProgram;
+	char GetProgram(std::string color);
+	std::vector<Garment*>* garmentsInProgram;
 };
