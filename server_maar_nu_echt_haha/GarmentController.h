@@ -17,6 +17,7 @@ class GarmentController
 		void AddGarment(char const* docname);
 		void Test();
 		void ProcessGarments();
+		void ProcessFinishedGarments();
 	private:
 		std::vector<Garment*>* toBeProcessed;
 		MachineController* machineptr;

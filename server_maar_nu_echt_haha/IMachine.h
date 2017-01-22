@@ -16,7 +16,7 @@ class IMachine
 		void virtual Initialize(int id);
 		int virtual GetId();
 		bool virtual AddToProgram(Garment* garment);
-		void virtual Finish();
+		void virtual Finish(std::vector<Garment*>* finishedGarmentsVector);
 		bool virtual IsBusy();
 		virtual ~IMachine() {}
 	private:

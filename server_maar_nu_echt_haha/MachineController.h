@@ -20,4 +20,5 @@ class MachineController
 		void Test();
 	private:
 		std::vector<IMachine*>* machines;
+		std::vector<Garment*>* finishedGarments;
 };

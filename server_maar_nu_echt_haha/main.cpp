@@ -26,6 +26,7 @@ int main(int argc, char **argv) {
 	c->ProcessGarments();
 	c->Test();
 	m->FinishMachine(19);
+	c->Test();
 	m->FinishMachine(24);
 	
 	delete m;

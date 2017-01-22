@@ -15,7 +15,7 @@ public:
 	void Initialize(int id);
 	int GetId();
 	bool AddToProgram(Garment* garment);
-	void Finish();
+	void Finish(std::vector<Garment*>* finishedGarmentsVector);
 	bool IsBusy();
 	virtual ~Wasmachine();
 private:

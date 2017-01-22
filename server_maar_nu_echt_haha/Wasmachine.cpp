@@ -58,9 +58,13 @@ bool Wasmachine::AddToProgram(Garment* garment)
 	return false;
 }
 
-void Wasmachine::Finish()
+void Wasmachine::Finish(std::vector<Garment*>* finishedGarmentsVector)
 {
-	
+	for(unsigned int i = 0; i<garmentsInProgram->size(); i++)
+	{
+		finishedGarmentsVector->push_back(garmentsInProgram->at(i));
+	}
+	garmentsInProgram->clear();
 	printf("Wasmachine met id %i is klaar\n", this->id);
 }
 

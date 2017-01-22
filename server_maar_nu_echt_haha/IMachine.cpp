@@ -23,10 +23,12 @@ bool IMachine::AddToProgram(Garment* garment)
 	return false;
 }
 
-void IMachine::Finish()
+
+void IMachine::Finish(std::vector<Garment*>* finishedGarmentsVector)
 {
 	printf("Incorrect implementation of abstraction, should not be called\n");
 }
+
 
 bool IMachine::IsBusy()
 {

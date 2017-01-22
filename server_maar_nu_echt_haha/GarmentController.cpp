@@ -45,3 +45,8 @@ void GarmentController::ProcessGarments()
 		}
 	}
 }
+
+void GarmentController::ProcessFinishedGarments()
+{
+	machineptr->CollectFinishedGarments(toBeProcessed);
+}
