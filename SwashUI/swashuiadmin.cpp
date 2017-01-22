@@ -39,3 +39,17 @@ void SwashUIAdmin::on_btnSendGarments_clicked()
 {
     clientPtr->SendMessage("garmentsgarments doesn't have a problem");
 }
+
+void SwashUIAdmin::RefreshListWidgets()
+{
+      for(it = uiadmin->garmentlist.begin(); it != uiadmin->garmentlist.end(); it++)
+      {
+           ui->lwGarments->addItem((*it)->ToString());
+      }
+
+      for(it = uiadmin->customerlist.begin(); it != uiadmin->customerlist.end(); it++)
+      {
+           ui->lwCustomer->addItem((*it)->ToString());
+      }
+}
+
