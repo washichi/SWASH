@@ -30,9 +30,11 @@ bool MachineController::SendGarmentToMachine(Garment* garment)
 	{
 		if(machines->at(i)->AddToProgram(garment))
 		{
+			printf("processed\n");
 			return true;
 		}
 	}
+	printf("not processed\n");
 	return false;
 }
 
