@@ -10,5 +10,5 @@ IMachine *MachineFactory::NewMachine(const std::string &name)
 	{
 		return new Dryer;
 	}
-         return NULL;
+    return NULL;
 }

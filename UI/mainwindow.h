@@ -29,6 +29,8 @@ private slots:
 
     void on_pushButton_7_clicked();
 
+    void on_btAlarmStop_clicked();
+
     void on_btStopSelectedMachine_clicked();
 
     void on_btCallEmployee_clicked();
@@ -42,6 +44,8 @@ private slots:
     Garment findObject(int idName);
 
     void on_btAddGarment_clicked();
+
+    void on_listWidgetGarments_activated(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;

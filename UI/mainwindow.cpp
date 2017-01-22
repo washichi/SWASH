@@ -83,12 +83,13 @@ void MainWindow::on_btStopSelectedMachine_clicked()
 
 }
 
-/*void MainWindow::on_btAlarmStop_clicked()
+void MainWindow::on_btAlarmStop_clicked()
 {
     Communication.send("Stop Everything!");
 
 }
-*/
+
+
 void MainWindow::on_listWidgetGarments_clicked(const QModelIndex &index)
 {
     //QListWidgetItem *object = ui->listWidgetGarments->currentItem();
@@ -210,5 +211,10 @@ void MainWindow::on_btAddGarment_clicked()
         msgBox.exec();
     }
 
+
+}
+
+void MainWindow::on_listWidgetGarments_activated(const QModelIndex &index)
+{
 
 }

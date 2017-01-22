@@ -19,7 +19,7 @@ MachineController::~MachineController()
 void MachineController::AddMachine(std::string name, int id)
 {
 	IMachine* machine = MachineFactory::NewMachine(name);
-	machine->SetId(id);
+	machine->Initialize(id);
 	machines->push_back(machine);
 }
 
@@ -28,12 +28,14 @@ bool MachineController::SendGarmentToMachine(Garment* garment)
 	
 	for(unsigned int i=0; i<machines->size(); i++)
 	{
-		//printf("Send garment with customerID %i, machine %i\n", garment->GetId(), i);
-		//stuur naar machine om wasprogramma te berekenen
-		//eerst wassen, de rest mag random
-		machines->at(i)->CalculateProgram(garment);
+		if(machines->at(i)->AddToProgram(garment))
+		{
+			printf("processed\n");
+			return true;
+		}
 	}
-	return true;
+	printf("not processed\n");
+	return false;
 }
 
 void MachineController::FinishMachine(int id)

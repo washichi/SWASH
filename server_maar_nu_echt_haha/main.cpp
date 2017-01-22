@@ -24,6 +24,7 @@ int main(int argc, char **argv) {
 	m->AddMachine("DRY", 25);
 	c->Test();
 	c->ProcessGarments();
+	c->Test();
 	m->FinishMachine(19);
 	m->FinishMachine(24);
 	

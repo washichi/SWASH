@@ -12,11 +12,14 @@ class Dryer : public IMachine
 {
 public:
 	void Test();
-	void SetId(int id);
+	void Initialize(int id);
 	int GetId(int id);
-	void CalculateProgram(Garment* garment);
+	bool AddToProgram(Garment* garment);
 	void Finish();
+	bool IsBusy();
 	virtual ~Dryer() {}
 private:
 	int id;
+	bool busy;
+	bool readyToCalculateProgram;
 };
