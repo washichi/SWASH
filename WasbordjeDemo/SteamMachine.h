@@ -6,7 +6,7 @@
 class SteamMachine: public Machine
 {	
 	public:
-		SteamMachine(int drumSize);
+		SteamMachine(int drumSize, MachineCommunication& com);
 		virtual ~SteamMachine();
 		int GetPressure();
 		int getTemperature();

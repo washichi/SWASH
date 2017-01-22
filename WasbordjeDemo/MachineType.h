@@ -7,6 +7,6 @@ enum MachineType
   dryer,
   steammachine,
   centrifuge,
-  unknown
+  typeUnknown
 };
 #endif

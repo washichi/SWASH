@@ -1,7 +1,7 @@
 #include "Dryer.h"
 
-Dryer::Dryer(int drumSize)
-  : Machine(drumSize)
+Dryer::Dryer(int drumSize, MachineCommunication& com)
+  : Machine(drumSize, com)
   , temperature(0)
 {
   

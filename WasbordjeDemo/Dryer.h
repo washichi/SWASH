@@ -6,7 +6,7 @@
 class Dryer: public Machine
 {	
 	public:
-		Dryer(int drumSize);
+		Dryer(int drumSize, MachineCommunication& com);
 		virtual ~Dryer();
 		int GetTemperature();
 

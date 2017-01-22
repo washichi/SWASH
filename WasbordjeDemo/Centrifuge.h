@@ -6,7 +6,7 @@
 class Centrifuge: public Machine
 {	
 	public:
-		Centrifuge(int drumSize);
+		Centrifuge(int drumSize, MachineCommunication& com);
 		virtual ~Centrifuge();
 		
 		
