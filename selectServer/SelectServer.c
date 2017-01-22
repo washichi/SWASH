@@ -25,18 +25,24 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <semaphore.h>
+#include <mqueue.h>
 
 #define SERVER_PORT 5001
 
 #define TRUE 1
 #define FALSE 0
+#define ARRAYSIZE 60
+#define MAXLEN 80
+#define EXTRA 5
+#define MAXINPUT MAXLEN+EXTRA+2
+#define MSGSIZE 20
 
 int i, len, resource, on=1;
 int listen_sd, max_sd, new_sd;
 int desc_ready, end_server = FALSE;
 int close_conn;
 	
-char buffer[80];
+char buffer[MAXLEN];
 struct sockaddr_in addr;
 struct timeval timeout;
 struct machinePara;
@@ -218,7 +224,21 @@ ReadWriteToSockets (void * threadArgs)
 						len = resource;
 						
 						len = len - 2;
-						printf("  %d bytes were received\n", len);
+						printf("  %s bytes were received\n", buffer);
+						
+						/*
+						
+						char *protocolString = memmem()
+						
+						if (buffer == )
+						{						
+							fgets(inputForm, len+1, stdin);
+							char mq_name[MAXLEN] = "/_mq_mq_";
+							mqd_t mq_fd = -1;
+							mq_fd = mq_open (mq_name, O_WRONLY);
+							mq_send (mq_fd, inputForm, sizeof(char)*MSGSIZE, 0);
+						}
+						*/
 
 						char message[5] = "#015$";
 						printf("message to send:%s\n", message);

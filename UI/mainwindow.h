@@ -45,6 +45,8 @@ private slots:
 
     void on_btAddGarment_clicked();
 
+    void on_listWidgetGarments_activated(const QModelIndex &index);
+
 private:
     Ui::MainWindow *ui;
 };

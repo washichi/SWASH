@@ -213,3 +213,8 @@ void MainWindow::on_btAddGarment_clicked()
 
 
 }
+
+void MainWindow::on_listWidgetGarments_activated(const QModelIndex &index)
+{
+
+}
