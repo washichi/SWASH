@@ -11,15 +11,19 @@
 class Dryer : public IMachine
 {
 public:
+	~Dryer();
 	void Test();
 	void Initialize(int id);
-	int GetId(int id);
+	int GetId();
 	bool AddToProgram(Garment* garment);
-	void Finish();
+	void Finish(std::vector<Garment*>* finishedGarmentsVector);
 	bool IsBusy();
-	virtual ~Dryer() {}
+	
 private:
 	int id;
-	bool busy;
 	bool readyToCalculateProgram;
+	bool busy;
+	char currentProgram;
+	char GetProgram(std::string color);
+	std::vector<Garment*>* garmentsInProgram;
 };

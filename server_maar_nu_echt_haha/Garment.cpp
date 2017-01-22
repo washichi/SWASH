@@ -112,6 +112,11 @@ int Garment::GetId() const
 	return id;
 }
 
+int Garment::GetOrderAmount() const
+{
+	return orderamount;
+}
+
 double Garment::GetWeight() const
 {
 	return weight;
@@ -145,6 +150,11 @@ bool Garment::GetSteamer() const
 bool Garment::GetCentrifuge() const
 {
 	return centrifuge;
+}
+
+bool Garment::GetFinished() const
+{
+	return finished;
 }
 
 void Garment::CheckIfFinished()

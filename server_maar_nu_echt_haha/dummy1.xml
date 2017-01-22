@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <garment>
-	<customerid>541</customerid>
-	<material>Test</material>
-	<color>Fault</color>
+	<customerid>540</customerid>
+	<material>Linen</material>
+	<color>White</color>
 	<weight>20.250</weight>
-	<washer>1</washer>
+	<washer>0</washer>
 	<dryer>1</dryer>
 	<steamer>0</steamer>
 	<centrifuge>0</centrifuge>
-	<garmentsinorder>3</garmentsinorder>
+	<garmentsinorder>2</garmentsinorder>
 </garment>

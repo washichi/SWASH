@@ -20,6 +20,7 @@ class GarmentController
 		void ProcessFinishedGarments();
 	private:
 		std::vector<Garment*>* toBeProcessed;
+		std::vector<Garment*>* finishedGarments;
 		MachineController* machineptr;
 	
 };

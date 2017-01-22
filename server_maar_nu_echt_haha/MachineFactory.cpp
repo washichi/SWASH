@@ -10,5 +10,14 @@ IMachine *MachineFactory::NewMachine(const std::string &name)
 	{
 		return new Dryer;
 	}
+	else if(name == "STE")
+	{
+		return new Steamer;
+	}
+	else if(name == "CEN")
+	{
+		return new Centrifuge;
+	}
+	
     return NULL;
 }

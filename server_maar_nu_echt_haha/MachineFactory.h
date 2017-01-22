@@ -9,6 +9,8 @@
 #include "IMachine.h"
 #include "Wasmachine.h"
 #include "Dryer.h"
+#include "Steamer.h"
+#include "Centrifuge.h"
 
 class MachineFactory
  {

@@ -8,10 +8,10 @@
 #include <map>
 #include "IMachine.h"
 
-class Wasmachine : public IMachine
+class Centrifuge : public IMachine
 {
 public:
-	~Wasmachine();
+	~Centrifuge();
 	void Test();
 	void Initialize(int id);
 	int GetId();
