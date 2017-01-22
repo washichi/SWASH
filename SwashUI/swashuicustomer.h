@@ -25,6 +25,8 @@ private slots:
 
     void on_txtLogin_textChanged();
 
+    void on_btAddGarment_clicked();
+
 private:
     Ui::SwashUICustomer *ui;
 

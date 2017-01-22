@@ -1,7 +1,8 @@
 #include "communication.h"
 
+
+//#include <QWebSocket>
 #include <QtCore/QDebug>
-#include <QtWebSockets/QWebSocket>
 #include <QCoreApplication>
 #include <iostream>
 #include <QTimer>

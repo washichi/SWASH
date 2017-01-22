@@ -3,7 +3,6 @@
 #include <QString>
 #include <QDebug>
 
-/*
 
 SwashAdmin::SwashAdmin()
 {
@@ -28,12 +27,13 @@ void SwashAdmin::addCustomerToList(Customer *customer)
 
 QString SwashAdmin::GetGarmentString()
 {
+    addGarmentToList(this->garment);
     QString AllGarmentElements;
       for(it = garmentlist.begin(); it != garmentlist.end(); it++)
       {
-          garment = garmentlist->data();
-          AllGarmentElements = garment.ToString();
+          AllGarmentElements = (*it)->ToString();
       }
+      qDebug() << AllGarmentElements;
       return AllGarmentElements;
 }
 
@@ -42,9 +42,7 @@ QString SwashAdmin::GetCustomerString()
     QString AllCustomerElements;
     for(iterator = customerlist.begin(); iterator != customerlist.end(); iterator++)
     {
-      customer = customerlist.data();
-      AllCustomerElements = customer.ToString();
+      AllCustomerElements = (*iterator)->ToString();
     }
     return AllCustomerElements;
 }
-*/

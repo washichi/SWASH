@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>548</width>
-    <height>237</height>
+    <width>646</width>
+    <height>518</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>50</y>
+      <x>50</x>
+      <y>330</y>
       <width>59</width>
       <height>15</height>
      </rect>
@@ -30,8 +30,8 @@
    <widget class="QPushButton" name="btnAccept">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>170</y>
+      <x>220</x>
+      <y>450</y>
       <width>111</width>
       <height>23</height>
      </rect>
@@ -43,8 +43,8 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>80</y>
+      <x>50</x>
+      <y>360</y>
       <width>59</width>
       <height>15</height>
      </rect>
@@ -56,8 +56,8 @@
    <widget class="QProgressBar" name="pbProgram">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>130</y>
+      <x>50</x>
+      <y>410</y>
       <width>461</width>
       <height>23</height>
      </rect>
@@ -69,7 +69,7 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>340</x>
+      <x>10</x>
       <y>20</y>
       <width>59</width>
       <height>15</height>
@@ -79,15 +79,183 @@
      <string>Login:</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="txtLogin">
+   <widget class="QLineEdit" name="txtLogin">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>10</y>
-      <width>104</width>
-      <height>31</height>
+      <x>60</x>
+      <y>20</y>
+      <width>113</width>
+      <height>27</height>
      </rect>
     </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>60</y>
+      <width>511</width>
+      <height>321</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Add Garments:</string>
+    </property>
+    <widget class="QListWidget" name="listWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>256</width>
+       <height>192</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="cmbColour">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>30</y>
+       <width>191</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>Black</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>White</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Coloured</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QCheckBox" name="cbWash">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>150</y>
+       <width>100</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Wash</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="cbDry">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>180</y>
+       <width>100</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Dry</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="cbSteam">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>210</y>
+       <width>100</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Steam</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="cbCentrifuge">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>240</y>
+       <width>100</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Centrifuge</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="cmbMaterial">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>70</y>
+       <width>191</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>Cotton</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Silk</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Wool</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Satin</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Nylon</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Linen</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Polyester</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QDoubleSpinBox" name="nmrWeight">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>110</y>
+       <width>50</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btAddGarment">
+     <property name="geometry">
+      <rect>
+       <x>380</x>
+       <y>280</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Add Garment</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -95,8 +263,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>548</width>
-     <height>20</height>
+     <width>646</width>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuCustomer">

@@ -24,7 +24,7 @@ void SwashUIAdmin::setup(Communication *clientPtr, QString port)
 {
     clientPtr->start();
     ui->lbPort->setText(port);
-    //uiadmin = new SwashAdmin();
+    uiadmin = new SwashAdmin();
     filehandler = new XMLFileHandler(clientPtr);
 }
 
@@ -32,7 +32,7 @@ void SwashUIAdmin::on_btnDummyData_clicked()
 {
     filehandler->CreateQDomDocument();
     filehandler->ProcessData();
-    //ui->lwGarments->addItem(uiadmin->GetGarmentString());
+    ui->lwGarments->addItem(uiadmin->GetGarmentString());
 }
 
 void SwashUIAdmin::on_btnSendGarments_clicked()
