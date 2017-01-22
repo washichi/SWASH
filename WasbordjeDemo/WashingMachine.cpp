@@ -225,8 +225,8 @@ bool WashingMachine::Program(wash & program)
   {
     // ##########################################################
     // CHECK FOR MESSAGES
-    //int receivedcommand = machineCommunication->ReceiveCommand();
-    //CheckCommand(receivedcommand);
+    int receivedcommand = machineCommunication->ReceiveCommand();
+    CheckCommand(receivedcommand);
     // ##########################################################
     TempControl(program.heat); // alvast beginnen met opwarmen
   }
