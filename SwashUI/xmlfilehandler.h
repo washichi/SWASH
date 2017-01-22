@@ -19,7 +19,7 @@ public:
 private:
 
    // QFile *qfile;
-   // QDomDocument *xmlGar;
+      QDomDocument *xmlGar;
     //QDomElement *root;
     Garment *garment;
     //SwashAdmin *admin;

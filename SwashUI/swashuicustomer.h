@@ -27,6 +27,12 @@ private slots:
 
     void on_btAddGarment_clicked();
 
+    void on_txtLogin_textChanged(const QString &arg1);
+
+    void on_btLogin_clicked();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::SwashUICustomer *ui;
 

@@ -81,7 +81,6 @@ void XMLFileHandler::CreateQDomDocument()
 
 void XMLFileHandler::ProcessData()
 {
-    /*
     QDomElement root = xmlGar->documentElement();
     QDomElement Component = root.firstChild().toElement();
 
@@ -121,7 +120,7 @@ void XMLFileHandler::ProcessData()
                 QString message = QString::number(id) + Material + color + QString::number(weight);
 
                 clientPtr->SendMessage(message);
-
+                qDebug() << message;
                 Child = Child.nextSibling().toElement();
 
 
@@ -130,5 +129,4 @@ void XMLFileHandler::ProcessData()
 
         Component = Component.nextSibling().toElement();
     }
-    */
 }

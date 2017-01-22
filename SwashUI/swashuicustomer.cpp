@@ -30,15 +30,6 @@ void SwashUICustomer::on_btnAccept_clicked()
     customer->AcceptProgram();
 }
 
-void SwashUICustomer::on_txtLogin_textChanged()
-{
-    QString name = "Harry Potter";
-    QString str = ui->txtLogin->text();
-    if(str == "77892")
-    {
-         customer = new Customer(77892, name);
-    }
-}
 
 void SwashUICustomer::on_btAddGarment_clicked()
 {
@@ -64,4 +55,23 @@ void SwashUICustomer::on_btAddGarment_clicked()
         msgBox.setText("Garment has been added.");
         msgBox.exec();
     }
+}
+
+
+void SwashUICustomer::on_pushButton_clicked()
+{
+    QString name = "Harry Potter";
+    if((ui->txtLogin->text()).toStdString() == "77892")
+    {
+         customer = new Customer(77892, name);
+         QMessageBox msgBox;
+         msgBox.setText("Hello Mr. Potter");
+         msgBox.exec();
+    }
+    else
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Login Failed");
+        msgBox.exec();
+   }
 }
