@@ -6,15 +6,13 @@
 #include <string>
 #include <vector>
 #include <map>
-
 #include "header.h"
-
 #include "GarmentController.h"
 #include "MachineController.h"
 
-int main(int argc, char **argv) 
-{
-	#define SERVER_PORT 5001
+#include "header.h"
+
+#define SERVER_PORT 5001
 #define TRUE 1
 #define FALSE 0
 #define MAXLEN 80
@@ -357,6 +355,4 @@ int OpenMessageQueue()
         exit(1);
     }
     return msq_id;
-}
-
 }
