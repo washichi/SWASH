@@ -7,6 +7,7 @@
 
 #include "garment.h"
 #include "customer.h"
+#include "machine.h"
 #include "communication.h"
 #include "xmlfilehandler.h"
 

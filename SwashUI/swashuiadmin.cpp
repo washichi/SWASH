@@ -47,7 +47,18 @@ void SwashUIAdmin::updateAllProcess()
 void SwashUIAdmin::updateProcess()
 {
        std::string lastMessage = (clientPtr->GetLastMessage().toStdString());
-       if(lastMessage == "customer")
+       if(lastMessage == "032")
+       {
+            int value = atoi(lastMessage.c_str());
+            Machine *machine = new Machine(value);
+            uiadmin->addMachineToList(machine);
+            ui->lwMachineStatus->addItem(machine->ToString());
+       }
+       else if(lastMessage == "033")
+       {
+
+       }
+       else if(lastMessage == "Customer")
        {
            //findCustomer(customer);
            //CustomerReady show on screen

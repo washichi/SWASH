@@ -8,7 +8,7 @@ SwashAdmin::SwashAdmin()
 {
     QString name = "Hoze Joze";
     QString material = "Wool";
-    QString color = "Pink";
+    QString color = "Coloured";
     customer = new Customer(1, name);
     garment = new Garment(1, 20.20, material, color, false, false, false, false);
     bool inProcess = false;
@@ -23,6 +23,12 @@ void SwashAdmin::addGarmentToList(Garment *garment)
 void SwashAdmin::addCustomerToList(Customer *customer)
 {
     customerlist.append(customer);
+    qDebug() << "customer was added to the customer list";
+}
+
+void SwashAdmin::addMachineToList(Machine *machine)
+{
+    machines.append(machine);
     qDebug() << "customer was added to the customer list";
 }
 

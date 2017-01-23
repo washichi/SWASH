@@ -31,6 +31,7 @@ void SwashUICustomer::on_btnAccept_clicked()
 {
     clientPtr->SendMessage("programaccepted");
     customer->AcceptProgram();
+    counter += 1;
 }
 
 
@@ -50,7 +51,7 @@ void SwashUICustomer::on_btAddGarment_clicked()
     }
     else
     {
-        counter += 1;
+
         QString materialString = (ui->cmbMaterial->currentText());
         QString colourString = (ui->cmbColour->currentText());
         Garment *garment = new Garment(counter, ui->nmrWeight->value(), materialString, colourString, ui->cbWash->isChecked(), ui->cbDry->isChecked(), ui->cbSteam->isChecked(), ui->cbCentrifuge->isChecked());

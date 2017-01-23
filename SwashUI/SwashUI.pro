@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     garment.cpp \
     customer.cpp \
     xmlfilehandler.cpp \
-    swashadmin.cpp
+    swashadmin.cpp \
+    machine.cpp
 
 HEADERS  += swashuiadmin.h \
     swashuicustomer.h \
@@ -28,7 +29,9 @@ HEADERS  += swashuiadmin.h \
     garment.h \
     customer.h \
     xmlfilehandler.h \
-    swashadmin.h
+    swashadmin.h \
+    ../Machine.h \
+    machine.h
 
 FORMS    += swashuiadmin.ui \
     swashuicustomer.ui
