@@ -42,6 +42,7 @@ private:
     Communication *clientPtr;
     QString Port;
     Customer *customer;
+    int counter;
 };
 
 #endif // SWASHUICUSTOMER_H

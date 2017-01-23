@@ -249,85 +249,25 @@ main (int argc, char *argv[])
 						{
 							printf("Garment was send\n");
 							FILE *fp;
-							char buff[255];
+							
+							printf("%s\n", buffer);
 
-							fp = fopen("/home/student/Public/testt.xml", "w+");
+							fp = fopen("final.xml", "w+");
 							fputs(buffer, fp);
 							fclose(fp);
 												
 							pid_t pid;
-							double priority;
+							
 							double messagesize;
 							msq_id = OpenMessageQueue();
 
-								printf("File is being send\n");
-
-								while(1)
-								{
-									char inputfname[128] = "testt.xml";							
-									startClient(inputfname, 1);
-									
-									Mesg * writermsg = (Mesg *) malloc(sizeof(Mesg));
-									Mesg * readermsg = (Mesg *) malloc(sizeof(Mesg));
-
-									if (read_message(msq_id, 1, readermsg) >= 0)
-									{
-										if((pid = fork()) < 0)
-										{
-											fprintf(stderr, "pid = fork() error\n");
-											exit(1);
-										}
-
-										if(pid == 0)
-										{
-											sscanf(readermsg->mesg_data, "%s %ld %lf", writermsg->mesg_data, &writermsg->mesg_type, &priority);
-											messagesize = MAXMESSAGEDATA * (priority / 10) * 2;
-											writermsg->mesg_type = readermsg->pid;											
-
-											fp = fopen(writermsg->mesg_data, "r");
-											if(fp != NULL)
-											{
-												writermsg->fileTransferCompleted = 0;
-												while(fread(writermsg->mesg_data, sizeof(char), messagesize - 1, fp) > 0)
-												{
-													if((send_message(msq_id, writermsg)) == -1)
-													{
-														fprintf(stderr, "server send_message error: fread\n");
-														exit(1);
-													}
-													memset(writermsg->mesg_data, 0, messagesize);
-													usleep(350);
-												}
-												
-												strcpy(writermsg->mesg_data, "File transfer completed.\n");
-												writermsg->fileTransferCompleted = 1;
-
-												send_message(msq_id, writermsg);
-												memset(writermsg->mesg_data, 0, messagesize);
-												
-												printf("File transfer completed to pid[%ld] with priority %.0lf.\n\n", writermsg->mesg_type, priority);
-												fclose(fp);
-											}
-											else
-											{
-												writermsg->fileTransferCompleted = 1;
-												memset(writermsg, 0, MAXMESSAGEDATA);
-												strcpy(writermsg->mesg_data, "fopen error: file does not exist.\n");
-
-												if((send_message(msq_id, writermsg)) == -1)
-												{
-													fprintf(stderr, "server send_message error: fopen error\n");
-													exit(1);
-												}
-												memset(writermsg, 0, MAXMESSAGEDATA);
-											}
-										}
-									}
-									free(writermsg);
-									free(readermsg);
-								}
+							printf("File is being send\n");
+								
+							char inputfname[128] = "final.xml";							
+							startClient(inputfname);
 							break;
 						}
+							
 						
 						if (resource < 0)
 						{
@@ -368,7 +308,8 @@ main (int argc, char *argv[])
 	}
 }
 
-int send_message( int msg_qid, Mesg *qbuf )
+/*
+int send_message( int msg_qid, Mesg *qbuf)
 {
     int length, result;
 
@@ -379,6 +320,7 @@ int send_message( int msg_qid, Mesg *qbuf )
     }
     return (result);
 }
+* */
 
 
 int read_message (int qid, long type, Mesg *qbuf )

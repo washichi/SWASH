@@ -39,12 +39,19 @@ Communication::Communication(const char * ipaddress, unsigned short port, QObjec
 
 void Communication::SendMessage(QString message)
 {
+    if(socketdescriptor < 0)
+    {
     const char *messagee = message.toStdString().c_str();
     write(socketdescriptor, messagee, strlen(messagee));
 
     QEventLoop loop;
     connect(this, SIGNAL(messageReceived(std::string)), &loop, SLOT(quit()));
     loop.exec();
+    }
+    else
+    {
+        qDebug() << "No connection with Server";
+    }
 }
 
 QString Communication::GetLastMessage()

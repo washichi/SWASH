@@ -24,6 +24,7 @@ void SwashUICustomer::setup(SwashUIAdmin *UiAdmin, Communication *client, QStrin
     client->start();
     uiAdmin = UiAdmin;
     this->clientPtr = client;
+    counter = 0;
 }
 
 void SwashUICustomer::on_btnAccept_clicked()
@@ -49,12 +50,12 @@ void SwashUICustomer::on_btAddGarment_clicked()
     }
     else
     {
+        counter += 1;
         QString materialString = (ui->cmbMaterial->currentText());
         QString colourString = (ui->cmbColour->currentText());
-        Garment *garment = new Garment(123, ui->nmrWeight->value(), materialString, colourString, ui->cbWash->isChecked(), ui->cbDry->isChecked(), ui->cbSteam->isChecked(), ui->cbCentrifuge->isChecked());
+        Garment *garment = new Garment(counter, ui->nmrWeight->value(), materialString, colourString, ui->cbWash->isChecked(), ui->cbDry->isChecked(), ui->cbSteam->isChecked(), ui->cbCentrifuge->isChecked());
         //Garments.push_back(*garment);
-        ui->listWidget_2->addItem(garment->ToString()
-                                  );
+        ui->listWidget_2->addItem(garment->ToString());
         uiAdmin->addGarment(garment);
 
         // Signal to slot in SwashAdmin to add to list and use comms.
