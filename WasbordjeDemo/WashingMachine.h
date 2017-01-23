@@ -40,11 +40,6 @@ class WashingMachine: public Machine
     bool MotorCyclus(int dir, int speed, int time, int repeat, int heat);
     void SetSoap(int soap);
     bool Program(wash &program);
-    void TakeWater(int waterlevel);
-    void Sink();
-    void Heat(int temperature);
-
-
 };
 
 #endif
