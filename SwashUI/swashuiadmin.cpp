@@ -8,6 +8,8 @@
 
 #include <QDebug>
 
+#define POLLING_MS      300
+
 SwashUIAdmin::SwashUIAdmin(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::SwashUIAdmin)
@@ -26,6 +28,38 @@ void SwashUIAdmin::setup(Communication *clientPtr, QString port)
     ui->lbPort->setText(port);
     uiadmin = new SwashAdmin();
     filehandler = new XMLFileHandler(clientPtr);
+
+    uiTimer = new QTimer(this);
+            connect(uiTimer, SIGNAL(timeout()), this, SLOT(updateUI()));
+            uiTimer->start(POLLING_MS);
+
+        processTimer = new QTimer(this);
+            connect(processTimer, SIGNAL(timeout()), this, SLOT(updateAllProcess()));
+            processTimer->start(POLLING_MS);
+
+}
+
+void SwashUIAdmin::updateAllProcess()
+{
+    uiadmin->updateProcess();
+}
+
+void SwashUIAdmin::updateUI()
+{
+    //Update List Widgets
+}
+
+
+void SwashUIAdmin::addGarment(Garment *garment)
+{
+    uiadmin->addGarmentToList(garment);
+    QString sendString = "<?xml version='1.0' encoding='UTF-8'?> \n <garment> \n <customerid>" + QString::number(garment->GetId()) + "</customerid> \n <material>"
+                        + garment->GetMaterial() + "</material> \n <color>" + garment->GetColor() + "</color> \n <weight>" + QString::number(garment->GetWeight()) +
+                        "</weight> \n <dryer>" + garment->GetDryer() + "</dryer> \n <steamer>" +
+                        garment->GetSteamer() + "</steamer> \n <centrifuge>" +
+                        garment->GetCentrifuge() + "</centrifuge> \n </garment>";
+                       clientPtr->SendMessage(sendString);
+
 }
 
 void SwashUIAdmin::on_btnDummyData_clicked()
@@ -42,14 +76,6 @@ void SwashUIAdmin::on_btnSendGarments_clicked()
 
 void SwashUIAdmin::RefreshListWidgets()
 {
-      for(it = uiadmin->garmentlist.begin(); it != uiadmin->garmentlist.end(); it++)
-      {
-           ui->lwGarments->addItem((*it)->ToString());
-      }
 
-      for(it = uiadmin->customerlist.begin(); it != uiadmin->customerlist.end(); it++)
-      {
-           ui->lwCustomer->addItem((*it)->ToString());
-      }
 }
 

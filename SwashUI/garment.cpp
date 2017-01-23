@@ -57,7 +57,7 @@ QString Garment::GetColor() const
 
 QString Garment::ToString()
 {
-    QString Garmentstring = "Id: " + QString::number(id) + "Weight: " + QString::number(weight) + "Material: " + material + "Color" + color;
+    QString Garmentstring = "Id: " + QString::number(id) + "Weight: " + QString::number(weight) + "Material: " + material + "Color: " + color + "Wash: " + wash + "Dryer: " + dryer + "Steamer: " + steamer + "Centrifuge: " + centrifuge;
     return Garmentstring;
 }
 
