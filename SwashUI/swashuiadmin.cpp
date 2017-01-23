@@ -8,6 +8,8 @@
 
 #include <QDebug>
 
+#define POLLING_MS      300
+
 SwashUIAdmin::SwashUIAdmin(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::SwashUIAdmin)
@@ -26,7 +28,27 @@ void SwashUIAdmin::setup(Communication *clientPtr, QString port)
     ui->lbPort->setText(port);
     uiadmin = new SwashAdmin();
     filehandler = new XMLFileHandler(clientPtr);
+
+    uiTimer = new QTimer(this);
+            connect(uiTimer, SIGNAL(timeout()), this, SLOT(updateUI()));
+            uiTimer->start(POLLING_MS);
+
+        processTimer = new QTimer(this);
+            connect(processTimer, SIGNAL(timeout()), this, SLOT(updateAllProcess()));
+            processTimer->start(POLLING_MS);
+
 }
+
+void SwashUIAdmin::updateAllProcess()
+{
+    uiadmin->updateProcess();
+}
+
+void SwashUIAdmin::updateUI()
+{
+    //Update List Widgets
+}
+
 
 void SwashUIAdmin::addGarment(Garment *garment)
 {
@@ -36,7 +58,8 @@ void SwashUIAdmin::addGarment(Garment *garment)
                         "</weight> \n <dryer>" + garment->GetDryer() + "</dryer> \n <steamer>" +
                         garment->GetSteamer() + "</steamer> \n <centrifuge>" +
                         garment->GetCentrifuge() + "</centrifuge> \n </garment>";
-    clientPtr->SendMessage(sendString);
+                       clientPtr->SendMessage(sendString);
+
 }
 
 void SwashUIAdmin::on_btnDummyData_clicked()
@@ -53,16 +76,6 @@ void SwashUIAdmin::on_btnSendGarments_clicked()
 
 void SwashUIAdmin::RefreshListWidgets()
 {
-    /*
-      for(it = garmentlist.begin(); it != garmentlist.end(); it++)
-      {
-           ui->lwGarments->addItem((*it)->ToString());
-      }
 
-      for(it = customerlist.begin(); it != customerlist.end(); it++)
-      {
-           ui->lwCustomer->addItem((*it)->ToString());
-      }
-      */
 }
 
