@@ -14,12 +14,6 @@ SwashAdmin::SwashAdmin()
     bool inProcess = false;
 }
 
-void SwashAdmin::updateProcess()
-{
-
-
-}
-
 void SwashAdmin::addGarmentToList(Garment *garment)
 {
     garmentlist.append(garment);

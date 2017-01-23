@@ -11,7 +11,6 @@ WashingMachine::WashingMachine(int drumSize, MachineCommunication& com)
 }
 
 
-
 bool WashingMachine::Start(char program)
 {
   currentProgram = program;

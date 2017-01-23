@@ -39,6 +39,7 @@ private:
     QTimer *uiTimer;
     QTimer *processTimer;
     void updateUI();
+    void updateProcess();
 
 };
 

@@ -41,7 +41,17 @@ void SwashUIAdmin::setup(Communication *clientPtr, QString port)
 
 void SwashUIAdmin::updateAllProcess()
 {
-    uiadmin->updateProcess();
+    updateProcess();
+}
+
+void SwashUIAdmin::updateProcess()
+{
+       std::string lastMessage = (clientPtr->GetLastMessage().toStdString());
+       if(lastMessage == "customer")
+       {
+           //findCustomer(customer);
+           //CustomerReady show on screen
+       }
 }
 
 void SwashUIAdmin::updateUI()
