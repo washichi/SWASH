@@ -1,15 +1,3 @@
-#include <stdio.h>
-//#include <libxml/parser.h>
-#include <libxml/xmlIO.h>
-#include <libxml/xinclude.h>
-#include <libxml/tree.h>
-#include <string>
-#include <vector>
-#include <map>
-#include "header.h"
-#include "GarmentController.h"
-#include "MachineController.h"
-
 #include "header.h"
 
 #define SERVER_PORT 5001
@@ -277,8 +265,6 @@ main (int argc, char *argv[])
 								
 							char inputfname[128] = "final.xml";							
 							startClient(inputfname);
-							break;
-						}
 							
 						
 						if (resource < 0)

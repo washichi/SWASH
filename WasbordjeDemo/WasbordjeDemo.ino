@@ -104,7 +104,29 @@ void CheckCommand(int command)
       if (machine->Start(program))
       {
         // send done command
-        machineCommunication->SendCommand("#008$");
+        switch (machinetype)
+        {
+          case washingmachine:
+            machineCommunication->SendCommand("#032$");
+            break;
+
+          case dryer:
+            machineCommunication->SendCommand("#033$");
+            break;
+
+          case steammachine:
+            machineCommunication->SendCommand("#034$");
+            break;
+
+          case centrifuge:
+            machineCommunication->SendCommand("#035$");
+            break;
+
+          default:
+            //machine not recognized.
+            return false;
+            break;
+        }
         machinestate = idle;
       }
       break;
@@ -124,7 +146,9 @@ void CheckCommand(int command)
       machineCommunication->SendCommand("#" + TemperatureMapper() + "$");
       break;
     case 15:  //washprogram A
-      if (machinestate != idle){return;}
+      if (machinestate != idle) {
+        return;
+      }
       else
       {
         program = 'A';
@@ -133,7 +157,9 @@ void CheckCommand(int command)
       }
       break;
     case 18:  //Dryprogram A
-      if (machinestate != idle){return;}
+      if (machinestate != idle) {
+        return;
+      }
       else
       {
         program = 'A';
@@ -142,7 +168,9 @@ void CheckCommand(int command)
       }
       break;
     case 21:  //Steamprogram A
-      if (machinestate != idle){return;}
+      if (machinestate != idle) {
+        return;
+      }
       else
       {
         program = 'A';
@@ -151,7 +179,9 @@ void CheckCommand(int command)
       }
       break;
     case 24:  //Centrifugeprogram A
-      if (machinestate != idle){return;}
+      if (machinestate != idle) {
+        return;
+      }
       else
       {
         program = 'A';
@@ -160,74 +190,90 @@ void CheckCommand(int command)
       }
       break;
     case 16:  //washprogram  B
-      if (machinestate != idle){return;}
-      else
-      {
-      program = 'B';
-      programID = "016";
-      CheckCommand(5);
+      if (machinestate != idle) {
+        return;
       }
-      break;    
-    case 19:  //Dryprogram B
-      if (machinestate != idle){return;}
       else
       {
-      program = 'B';
-      programID = "019";
-      CheckCommand(5);
+        program = 'B';
+        programID = "016";
+        CheckCommand(5);
+      }
+      break;
+    case 19:  //Dryprogram B
+      if (machinestate != idle) {
+        return;
+      }
+      else
+      {
+        program = 'B';
+        programID = "019";
+        CheckCommand(5);
       }
       break;
     case 22:  //Steamprogram B
-      if (machinestate != idle){return;}
+      if (machinestate != idle) {
+        return;
+      }
       else
       {
-      program = 'B';
-      programID = "022";
-      CheckCommand(5);
+        program = 'B';
+        programID = "022";
+        CheckCommand(5);
       }
       break;
     case 25:  //Centrifugeprogram B
-      if (machinestate != idle){return;}
+      if (machinestate != idle) {
+        return;
+      }
       else
       {
-      program = 'B';
-      programID = "025";
-      CheckCommand(5);
+        program = 'B';
+        programID = "025";
+        CheckCommand(5);
       }
       break;
     case 17:  //washprogram  C
-      if (machinestate != idle){return;}
+      if (machinestate != idle) {
+        return;
+      }
       else
       {
-      program = 'C';
-      programID = "017";
-      CheckCommand(5);
+        program = 'C';
+        programID = "017";
+        CheckCommand(5);
       }
       break;
     case 20:  //Dryprogram C
-      if (machinestate != idle){return;}
+      if (machinestate != idle) {
+        return;
+      }
       else
       {
-      program = 'C';
-      programID = "020";
-      CheckCommand(5);
+        program = 'C';
+        programID = "020";
+        CheckCommand(5);
       }
       break;
     case 23:  //Steamprogram C
-      if (machinestate != idle){return;}
+      if (machinestate != idle) {
+        return;
+      }
       else
       {
-      program = 'C';
-      programID = "023";
-      CheckCommand(5);
+        program = 'C';
+        programID = "023";
+        CheckCommand(5);
       }
       break;
     case 26:  //Centrifugeprogram C
-      if (machinestate != idle){return;}
+      if (machinestate != idle) {
+        return;
+      }
       else
       {
-      program = 'C';
-      CheckCommand(5);
+        program = 'C';
+        CheckCommand(5);
       }
       break;
     case 999:

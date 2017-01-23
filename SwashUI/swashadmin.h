@@ -15,6 +15,7 @@ public:
     void addCustomerToList(Customer *customer);
     QString GetGarmentString();
     QString GetCustomerString();
+    void updateProcess();
 
 private:
     Garment *garment;
@@ -23,6 +24,8 @@ private:
     QVector<Garment*> garmentlist;
     QVector<Customer*>::iterator iterator;
     QVector<Garment*>::iterator it;
+    bool inProcess;
+
 };
 
 #endif // SWASHADMIN_H

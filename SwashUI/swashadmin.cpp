@@ -11,6 +11,7 @@ SwashAdmin::SwashAdmin()
     QString color = "Pink";
     customer = new Customer(1, name);
     garment = new Garment(1, 20.20, material, color, false, false, false, false);
+    bool inProcess = false;
 }
 
 void SwashAdmin::addGarmentToList(Garment *garment)
