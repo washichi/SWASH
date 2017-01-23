@@ -265,6 +265,8 @@ main (int argc, char *argv[])
 								
 							char inputfname[128] = "final.xml";							
 							startClient(inputfname);
+							break;
+						}
 							
 						
 						if (resource < 0)

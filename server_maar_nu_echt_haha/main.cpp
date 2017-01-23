@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <libxml/parser.h>
+//#include <libxml/parser.h>
 #include <libxml/xmlIO.h>
 #include <libxml/xinclude.h>
 #include <libxml/tree.h>
@@ -277,6 +277,8 @@ main (int argc, char *argv[])
 								
 							char inputfname[128] = "final.xml";							
 							startClient(inputfname);
+							break;
+						}
 							
 						
 						if (resource < 0)
