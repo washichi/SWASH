@@ -28,6 +28,17 @@ void SwashUIAdmin::setup(Communication *clientPtr, QString port)
     filehandler = new XMLFileHandler(clientPtr);
 }
 
+void SwashUIAdmin::addGarment(Garment *garment)
+{
+    uiadmin->addGarmentToList(garment);
+    QString sendString = "<?xml version='1.0' encoding='UTF-8'?> \n <garment> \n <customerid>" + QString::number(garment->GetId()) + "</customerid> \n <material>"
+                        + garment->GetMaterial() + "</material> \n <color>" + garment->GetColor() + "</color> \n <weight>" + QString::number(garment->GetWeight()) +
+                        "</weight> \n <dryer>" + garment->GetDryer() + "</dryer> \n <steamer>" +
+                        garment->GetSteamer() + "</steamer> \n <centrifuge>" +
+                        garment->GetCentrifuge() + "</centrifuge> \n </garment>";
+    clientPtr->SendMessage(sendString);
+}
+
 void SwashUIAdmin::on_btnDummyData_clicked()
 {
     filehandler->CreateQDomDocument();
@@ -42,14 +53,16 @@ void SwashUIAdmin::on_btnSendGarments_clicked()
 
 void SwashUIAdmin::RefreshListWidgets()
 {
-      for(it = uiadmin->garmentlist.begin(); it != uiadmin->garmentlist.end(); it++)
+    /*
+      for(it = garmentlist.begin(); it != garmentlist.end(); it++)
       {
            ui->lwGarments->addItem((*it)->ToString());
       }
 
-      for(it = uiadmin->customerlist.begin(); it != uiadmin->customerlist.end(); it++)
+      for(it = customerlist.begin(); it != customerlist.end(); it++)
       {
            ui->lwCustomer->addItem((*it)->ToString());
       }
+      */
 }
 

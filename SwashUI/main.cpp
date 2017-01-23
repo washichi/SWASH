@@ -14,9 +14,8 @@ int main(int argc, char *argv[])
     Communication customer("192.168.146.143", 5001);
     Communication administartor("192.168.146.143", 5001);
 
-
     uia.setup(&administartor, "5001");
-    uic.setup(&customer, "5001");
+    uic.setup(&uia, &customer, "5001");
     
     uia.show();
     uic.show();

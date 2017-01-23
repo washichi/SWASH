@@ -2,6 +2,7 @@
 #include "ui_swashuicustomer.h"
 #include "customer.h"
 
+
 #include <QDebug>
 #include <QTextEdit>
 #include <QMessageBox>
@@ -18,9 +19,10 @@ SwashUICustomer::~SwashUICustomer()
     delete ui;
 }
 
-void SwashUICustomer::setup(Communication *client, QString port)
+void SwashUICustomer::setup(SwashUIAdmin *UiAdmin, Communication *client, QString port)
 {
     client->start();
+    uiAdmin = UiAdmin;
     this->clientPtr = client;
 }
 
@@ -47,10 +49,15 @@ void SwashUICustomer::on_btAddGarment_clicked()
     }
     else
     {
-        std::string materialString = (ui->cmbMaterial->currentText()).toStdString();
-        std::string colourString = (ui->cmbColour->currentText()).toStdString();
-        /*Garment *garment = new Garment(123, ui->nmrWeight->value(), materialString, colourString, ui->cbWash->isChecked(), ui->cbDry->isChecked(), ui->cbSteam->isChecked(), ui->cbCentrifuge->isChecked());
-        Garments.push_back(*garment);*/
+        QString materialString = (ui->cmbMaterial->currentText());
+        QString colourString = (ui->cmbColour->currentText());
+        Garment *garment = new Garment(123, ui->nmrWeight->value(), materialString, colourString, ui->cbWash->isChecked(), ui->cbDry->isChecked(), ui->cbSteam->isChecked(), ui->cbCentrifuge->isChecked());
+        //Garments.push_back(*garment);
+        ui->listWidget_2->addItem(garment->ToString()
+                                  );
+        uiAdmin->addGarment(garment);
+
+        // Signal to slot in SwashAdmin to add to list and use comms.
         QMessageBox msgBox;
         msgBox.setText("Garment has been added.");
         msgBox.exec();

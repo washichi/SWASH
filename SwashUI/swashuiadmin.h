@@ -22,6 +22,8 @@ public:
     explicit SwashUIAdmin(QWidget *parent = 0);
     ~SwashUIAdmin();
     void setup(Communication *clientPtr, QString port);
+    void addGarment(Garment *garment);
+    void RefreshListWidgets();
 
 private slots:
     void on_btnDummyData_clicked();

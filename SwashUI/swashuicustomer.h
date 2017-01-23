@@ -6,6 +6,8 @@
 
 #include "communication.h"
 #include "customer.h"
+#include "swashuiadmin.h"
+#include "garment.h"
 
 namespace Ui {
 class SwashUICustomer;
@@ -18,7 +20,7 @@ class SwashUICustomer : public QMainWindow
 public:
     explicit SwashUICustomer(QWidget *parent = 0);
     ~SwashUICustomer();
-    void setup(Communication *clientPtr, QString port);
+    void setup(SwashUIAdmin *UiAdmin, Communication *clientPtr, QString port);
 
 private slots:
     void on_btnAccept_clicked();
@@ -35,6 +37,7 @@ private slots:
 
 private:
     Ui::SwashUICustomer *ui;
+    SwashUIAdmin *uiAdmin;
 
     Communication *clientPtr;
     QString Port;
