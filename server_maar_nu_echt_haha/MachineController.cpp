@@ -8,6 +8,7 @@ MachineController::MachineController()
 
 MachineController::~MachineController()
 {
+	
 	for (unsigned int i =0; i< machines->size();i++)
    {
      delete (*machines)[i];
@@ -39,11 +40,9 @@ bool MachineController::SendGarmentToMachine(Garment* garment)
 	{
 		if(machines->at(i)->AddToProgram(garment))
 		{
-			printf("processed\n");
 			return true;
 		}
 	}
-	printf("not processed\n");
 	return false;
 }
 

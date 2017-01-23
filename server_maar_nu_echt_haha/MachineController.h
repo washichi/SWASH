@@ -16,6 +16,7 @@ class MachineController
 		~MachineController();
 		void AddMachine(std::string name, int id);
 		bool SendGarmentToMachine(Garment* garment);
+		void CollectFinishedGarments(std::vector<Garment*>* finishedGarmentsVector);
 		void FinishMachine(int id);
 		void Test();
 	private:

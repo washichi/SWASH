@@ -1,15 +1,15 @@
-#include "Wasmachine.h"
+#include "Steamer.h"
 
-void Wasmachine::Test()
+void Steamer::Test()
 {
-	printf("Wasmachine test + id %i\n", id);
+	printf("Dryer test + id %i\n", id);
 	for (unsigned int i =0; i< garmentsInProgram->size();i++)
    {
-     printf("Garment in washer with id %i\n", garmentsInProgram->at(i)->GetId());
-   } 
+     printf("Garment in dryer with id %i\n", garmentsInProgram->at(i)->GetId());
+   }
 }
 
-void Wasmachine::Initialize(int id)
+void Steamer::Initialize(int id)
 {
 	garmentsInProgram = new std::vector<Garment*>;
 	this->id = id;
@@ -17,8 +17,9 @@ void Wasmachine::Initialize(int id)
 	this->readyToCalculateProgram = true;
 }
 
-Wasmachine::~Wasmachine()
+Steamer::~Steamer()
 {
+	
 	for (unsigned int i =0; i< garmentsInProgram->size();i++)
    {
      delete (*garmentsInProgram)[i];
@@ -26,17 +27,16 @@ Wasmachine::~Wasmachine()
    } 
 	garmentsInProgram->clear();
 	delete garmentsInProgram;
-	
 }
 
-int Wasmachine::GetId()
+int Steamer::GetId()
 {
 	return this->id;
 }
 
-bool Wasmachine::AddToProgram(Garment* garment)
+bool Steamer::AddToProgram(Garment* garment)
 {
-	if(!garment->GetWasher() || this->busy)
+	if(!garment->GetSteamer() || this->busy || garment->GetWasher())
 	{
 		return false;
 	}
@@ -55,11 +55,11 @@ bool Wasmachine::AddToProgram(Garment* garment)
 	return false;
 }
 
-void Wasmachine::Finish(std::vector<Garment*>* finishedGarmentsVector)
+void Steamer::Finish(std::vector<Garment*>* finishedGarmentsVector)
 {
 	for(unsigned int i = 0; i<garmentsInProgram->size(); i++)
 	{
-		garmentsInProgram->at(i)->SetWasher(false);
+		garmentsInProgram->at(i)->SetSteamer(false);
 		finishedGarmentsVector->push_back(garmentsInProgram->at(i));
 	}
 	garmentsInProgram->clear();
@@ -67,12 +67,12 @@ void Wasmachine::Finish(std::vector<Garment*>* finishedGarmentsVector)
 	this->readyToCalculateProgram = true;
 }
 
-bool Wasmachine::IsBusy()
+bool Steamer::IsBusy()
 {
 	return this->busy;
 }
 
-char Wasmachine::GetProgram(std::string color)
+char Steamer::GetProgram(std::string color)
 {
 	if(color == "Black"){return 'A';}
 	else if(color == "White"){return 'B';}
