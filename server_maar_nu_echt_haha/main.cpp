@@ -15,14 +15,15 @@
 #define SERVER_PORT 5001
 #define TRUE 1
 #define FALSE 0
-#define MAXLEN 80
-#define MESSLEN 5
+#define MAXLEN 550
+#define MESSLEN 6
 
 int i, len, msq_id, artCount, resource, on=1;
 int listen_sd, max_sd, new_sd;
 int desc_ready, end_server = FALSE;
 int close_conn, FirstConnection, SecondConnection;
 int ThirdConnection;
+int j;
 
 char buffer[MAXLEN];
 //char message[MESSLEN];
@@ -33,6 +34,9 @@ struct timeval timeout;
 
 fd_set master_set, working_set;
 pthread_t   threadID; 
+
+MachineController* machineController;
+GarmentController* garmentController;
 
 void ConnectSockets(void);
 void UpdateProcess(void);
@@ -102,8 +106,11 @@ void ConnectSockets()
 	timeout.tv_usec = 0;
 }
 
-main (int argc, char *argv[])
+int main (int argc, char *argv[])
 {
+	j = 0;
+	machineController = new MachineController();
+	garmentController = new GarmentController(machineController);
 	ConnectSockets();
 	
 	if (pthread_detach (pthread_self ()) != 0)
@@ -216,44 +223,95 @@ main (int argc, char *argv[])
 		
 						if(strstr(buffer, "001") != NULL)
 						{
+							j++;
 							printf("machine is a washer\n");
 							char message[MESSLEN] = "#027$";
-							printf("message send %s \n", message);							
+							printf("message send %s \n", message);	
+							
+							machineController->AddMachine("WAS", j);
+							machineController->Test();
+													
 							resource = send(FirstConnection, message, len, 0);
 							break;
 						}
 						
 						if(strstr(buffer, "002") != NULL)
 						{
+							j++;
 							printf("machine is a dryer\n");
 							char message[MESSLEN] = "#028$";
-							printf("message send %s \n", message);							
+							printf("message send %s \n", message);		
+							
+							machineController->AddMachine("DRY", j);
+							machineController->Test();
+												
 							resource = send(FirstConnection, message, len, 0);
 							break;
 						}
 						
 						if(strstr(buffer, "003") != NULL)
 						{
+							j++;
 							printf("machine is a steamer\n");
 							char message[MESSLEN] = "#029$";
-							printf("message send %s \n", message);							
+							printf("message send %s \n", message);	
+							
+							machineController->AddMachine("STE", j);
+													
 							resource = send(FirstConnection, message, len, 0);;
 							break;
 						}
 						
 						if(strstr(buffer, "004") != NULL)
 						{
+							j++;
 							printf("machine is a centrifuge\n");
 							char message[MESSLEN] = "#030$";
+							printf("message send %s \n", message);	
+							
+							machineController->AddMachine("CEN", j);
+													
+							resource = send(FirstConnection, message, len, 0);
+							break;
+						}
+						if(strstr(buffer, "005") != NULL)
+						{
+							j++;
+							printf("program is started\n");
+							char message[MESSLEN] = "#005$";
 							printf("message send %s \n", message);							
 							resource = send(FirstConnection, message, len, 0);
 							break;
 						}
-						if(strstr(buffer, "004") != NULL)
+						if(strstr(buffer, "032") != NULL)
 						{
-							printf("program is started\n");
-							char message[MESSLEN] = "#005$";
-							printf("message send %s \n", message);							
+							printf("washer program is done \n");
+							
+							machineController->FinishMachine(1);
+							int finished = garmentController->ProcessFinishedGarments();
+							garmentController->Test();
+							
+							if(finished > 0)
+							{
+								char c = finished;
+								//std::string test = "#066$" + c;
+								char message[MESSLEN] = "ORDER";							
+								resource = send(FirstConnection, message, len, 0);
+							}
+							
+							break;
+						}
+							if(strstr(buffer, "035") != NULL)
+						{
+							printf("centrifuge program is done\n");
+							
+							machineController->FinishMachine(2);
+							garmentController->ProcessFinishedGarments();
+							garmentController->Test();
+							
+							char message[MESSLEN] = "#056$";
+							printf("message send %s \n", message);		
+													
 							resource = send(FirstConnection, message, len, 0);
 							break;
 						}
@@ -262,21 +320,19 @@ main (int argc, char *argv[])
 							printf("Garment was send\n");
 							FILE *fp;
 							
-							printf("%s\n", buffer);
+							char jemoeder[] = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><garment><customerid>540</customerid><material>Linen</material><color>White</color><weight>20.250</weight><washer>1</washer><dryer>0</dryer><steamer>0</steamer><centrifuge>0</centrifuge><garmentsinorder>1</garmentsinorder></garment>";
+							
+							printf("%s\n", jemoeder);
 
 							fp = fopen("final.xml", "w+");
-							fputs(buffer, fp);
+							fputs(jemoeder, fp);
 							fclose(fp);
-												
-							pid_t pid;
 							
-							double messagesize;
-							msq_id = OpenMessageQueue();
-
-							printf("File is being send\n");
-								
+												
 							char inputfname[128] = "final.xml";							
-							startClient(inputfname);
+							garmentController->AddGarment(inputfname);
+							garmentController->ProcessGarments();
+							garmentController->Test();
 							break;
 						}
 							
@@ -318,43 +374,4 @@ main (int argc, char *argv[])
 		if (FD_ISSET(i, &master_set))
 		close(i);
 	}
-}
-
-/*
-int send_message( int msg_qid, Mesg *qbuf)
-{
-    int length, result;
-
-    length = sizeof(Mesg) - sizeof(long);
-    if ((result = msgsnd(msg_qid, qbuf, length, 0)) == -1)
-    {
-        return (-1);
-    }
-    return (result);
-}
-* */
-
-
-int read_message (int qid, long type, Mesg *qbuf )
-{ 
-    int result, length; 
-
-    length = sizeof(Mesg) - sizeof(long);
-    
-    if ((result = msgrcv ( qid, qbuf, length, type, 0)) == -1) 
-    { 
-        return (-1); 
-    } 
-    return (result); 
-}
-
-int OpenMessageQueue()
-{
-    int msq_id;
-    if ((msq_id = msgget (MESSAGEQUEUEKEY, IPC_CREAT|0660)) < 0)
-    {
-        fprintf(stderr, "client: msgget error\n");
-        exit(1);
-    }
-    return msq_id;
 }

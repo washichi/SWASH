@@ -57,7 +57,7 @@ void GarmentController::ProcessGarments()
 	}
 }
 
-void GarmentController::ProcessFinishedGarments()
+int GarmentController::ProcessFinishedGarments()
 {
 	machineptr->CollectFinishedGarments(toBeProcessed);
 	for(unsigned int i = 0; i < toBeProcessed->size(); i++)
@@ -89,9 +89,10 @@ void GarmentController::ProcessFinishedGarments()
 						finishedGarments->erase(finishedGarments->begin()+i);
 					}
 				}
-				return;
+				return garment->GetId();
 			}
 			
 		}
 	}
+	return -1;
 }
